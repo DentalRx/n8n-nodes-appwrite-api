@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
 
+#### 0.1.2
+
+> 10 October 2026
+
+- The codex file names the node by its full type, `@dentalrx/n8n-nodes-appwrite.appwrite`, as n8n's verification review asked [`#19`](https://github.com/DentalRx/n8n-nodes-appwrite-api/pull/19).
+- The repository moved to [DentalRx/n8n-nodes-appwrite-api](https://github.com/DentalRx/n8n-nodes-appwrite-api). The npm package name is unchanged.
+
 #### 0.1.1
 
 > 26 September 2026

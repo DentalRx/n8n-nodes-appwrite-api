@@ -250,6 +250,10 @@ The node sets `usableAsTool`, so you can attach it to an **AI Agent** node and l
 
 ## Version history
 
+### 0.1.2
+
+Names the node by its full type in the codex file, as n8n's verification review asked. The repository moved to DentalRx/n8n-nodes-appwrite-api; the npm package name is unchanged.
+
 ### 0.1.1
 
 Fixes from running every operation against a live Appwrite Cloud project: Health › Get Certificate requires its Domain, Webhook › Update works on webhooks without basic authentication, OAuth2 server errors show Appwrite's reason, and requests that are safe to repeat are retried once after a connection reset.
