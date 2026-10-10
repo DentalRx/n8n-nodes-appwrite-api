@@ -1,6 +1,6 @@
 # @dentalrx/n8n-nodes-appwrite
 
-[![CI](https://github.com/DentalRx/n8n-nodes-appwrite/actions/workflows/ci.yml/badge.svg)](https://github.com/DentalRx/n8n-nodes-appwrite/actions/workflows/ci.yml)
+[![CI](https://github.com/DentalRx/n8n-nodes-appwrite-api/actions/workflows/ci.yml/badge.svg)](https://github.com/DentalRx/n8n-nodes-appwrite-api/actions/workflows/ci.yml)
 
 This is an [n8n](https://n8n.io) community node. It lets you use [Appwrite](https://appwrite.io) in your n8n workflows.
 
