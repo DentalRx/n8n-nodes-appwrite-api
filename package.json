@@ -16,9 +16,9 @@
 		"authentication"
 	],
 	"license": "MIT",
-	"homepage": "https://github.com/DentalRx/n8n-nodes-appwrite",
+	"homepage": "https://github.com/DentalRx/n8n-nodes-appwrite-api",
 	"bugs": {
-		"url": "https://github.com/DentalRx/n8n-nodes-appwrite/issues"
+		"url": "https://github.com/DentalRx/n8n-nodes-appwrite-api/issues"
 	},
 	"author": {
 		"name": "DentalRx",
@@ -26,7 +26,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/DentalRx/n8n-nodes-appwrite.git"
+		"url": "git+https://github.com/DentalRx/n8n-nodes-appwrite-api.git"
 	},
 	"engines": {
 		"node": ">=20.15"

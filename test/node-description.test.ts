@@ -79,7 +79,8 @@ describe('node metadata', () => {
 		// the build must emit it into dist/ (tsconfig includes nodes/**/*.json).
 		const packageName = packageJson.name;
 
-		expect(codex.node).toBe(packageName);
+		// The codex `node` field is the fully-qualified node type: `<package>.<node name>`.
+		expect(codex.node).toBe(`${packageName}.${description.name}`);
 		expect(codex.nodeVersion).toBe(`${description.version as number}.0`);
 		expect(codex.codexVersion).toBe('1.0');
 		expect(codex.categories.length).toBeGreaterThan(0);
