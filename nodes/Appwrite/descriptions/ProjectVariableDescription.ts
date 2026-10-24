@@ -86,6 +86,14 @@ export const projectVariableFields: INodeProperties[] = [
 		displayOptions: { show: show(['create']) },
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'A description of the variable',
+		displayOptions: { show: show(['create']) },
+	},
+	{
 		displayName: 'Secret',
 		name: 'secret',
 		type: 'boolean',
@@ -111,6 +119,13 @@ export const projectVariableFields: INodeProperties[] = [
 		description: 'The settings to change. Settings you do not add keep their current values.',
 		displayOptions: { show: show(['update']) },
 		options: [
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'A description of the variable',
+			},
 			{
 				displayName: 'Key',
 				name: 'key',

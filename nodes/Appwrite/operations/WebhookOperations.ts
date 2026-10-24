@@ -36,6 +36,7 @@ const SIMPLIFY_FIELDS = [
 interface WebhookSettings {
 	authPassword?: string;
 	authUsername?: string;
+	description?: string;
 	enabled?: boolean;
 	events?: string;
 	name?: string;
@@ -70,6 +71,7 @@ export async function executeWebhookOperation(
 					name: getStringParameter.call(this, 'name', i),
 					url: getStringParameter.call(this, 'url', i),
 					events: getStringListParameter.call(this, 'webhookEvents', i, 'Events'),
+					description: options.description || undefined,
 					enabled: options.enabled,
 					tls: options.tls,
 					// Appwrite refuses empty credentials, so blank ones are left out,
@@ -165,6 +167,7 @@ export async function executeWebhookOperation(
 					name: updateFields.name || (current.name as string | undefined),
 					url: updateFields.url || (current.url as string | undefined),
 					events: events.length > 0 ? events : (current.events as string[] | undefined),
+					description: updateFields.description ?? (current.description as string | undefined),
 					enabled: updateFields.enabled ?? (current.enabled as boolean | undefined),
 					tls: updateFields.tls ?? (current.tls as boolean | undefined),
 					authUsername: credential(updateFields.authUsername, current.authUsername),

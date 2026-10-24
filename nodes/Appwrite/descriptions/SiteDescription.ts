@@ -206,6 +206,13 @@ const siteConfigOptions: INodeProperties[] = [
 			'The runtime the site is built with, e.g. node-22. Leave this option out to keep the current runtime. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'A description of the site',
+	},
+	{
 		displayName: 'Enabled',
 		name: 'enabled',
 		type: 'boolean',
