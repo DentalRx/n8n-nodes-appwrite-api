@@ -281,6 +281,15 @@ export const messageFields: INodeProperties[] = [
 				description: 'Whether to create the message as a draft instead of sending it immediately',
 			},
 			{
+				displayName: 'Emails',
+				name: 'emails',
+				type: 'string',
+				default: '',
+				placeholder: 'e.g. name@example.com, other@example.com',
+				description:
+					'Email addresses to send the message to, as a comma-separated list or a JSON array. Use this for recipients that are not backed by an Appwrite user, target, or topic.',
+			},
+			{
 				displayName: 'HTML',
 				name: 'html',
 				type: 'boolean',
@@ -324,6 +333,14 @@ export const messageFields: INodeProperties[] = [
 				typeOptions: { minValue: 0 },
 				default: 0,
 				description: 'Badge for the push notification. Available only on iOS.',
+			},
+			{
+				displayName: 'Channel ID',
+				name: 'channelId',
+				type: 'string',
+				default: '',
+				description:
+					'The ID of the notification channel to deliver on. The app must already have created a channel with this ID, otherwise the channel from the app manifest is used. Available only on Android.',
 			},
 			{
 				displayName: 'Color',
@@ -506,6 +523,15 @@ export const messageFields: INodeProperties[] = [
 					'Whether to keep the message as a draft. Setting this to false releases the message for delivery.',
 			},
 			{
+				displayName: 'Emails',
+				name: 'emails',
+				type: 'string',
+				default: '',
+				placeholder: 'e.g. name@example.com, other@example.com',
+				description:
+					'Email addresses to send the message to, as a comma-separated list or a JSON array. Use this for recipients that are not backed by an Appwrite user, target, or topic.',
+			},
+			{
 				displayName: 'HTML',
 				name: 'html',
 				type: 'boolean',
@@ -584,6 +610,14 @@ export const messageFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'The body of the push notification',
+			},
+			{
+				displayName: 'Channel ID',
+				name: 'channelId',
+				type: 'string',
+				default: '',
+				description:
+					'The ID of the notification channel to deliver on. The app must already have created a channel with this ID, otherwise the channel from the app manifest is used. Available only on Android.',
 			},
 			{
 				displayName: 'Color',

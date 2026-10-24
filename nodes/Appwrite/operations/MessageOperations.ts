@@ -45,6 +45,7 @@ interface EmailMessageFields {
 	html?: boolean;
 	cc?: string;
 	bcc?: string;
+	emails?: string;
 	scheduledAt?: string;
 	attachments?: string;
 }
@@ -63,6 +64,7 @@ interface PushMessageFields {
 	color?: string;
 	tag?: string;
 	badge?: number;
+	channelId?: string;
 	draft?: boolean;
 	scheduledAt?: string;
 	contentAvailable?: boolean;
@@ -102,10 +104,11 @@ export async function executeMessageOperation(
 		const content = getStringParameter.call(this, 'content', i);
 		const options = getCollectionParameter.call(this, 'options', i) as EmailMessageFields;
 		const { topics, users, targets } = getRecipients();
-		if (!topics && !users && !targets && options.draft !== true) {
+		const emails = listOrUndefined(options.emails, 'Emails');
+		if (!topics && !users && !targets && !emails && options.draft !== true) {
 			throw new NodeOperationError(
 				this.getNode(),
-				'At least one of Topic IDs, User IDs, or Target IDs must be provided',
+				'At least one of Topic IDs, User IDs, Target IDs, or Emails must be provided',
 				{
 					itemIndex: i,
 					description:
@@ -125,6 +128,7 @@ export async function executeMessageOperation(
 					topics,
 					users,
 					targets,
+					emails,
 					cc: listOrUndefined(options.cc, 'CC'),
 					bcc: listOrUndefined(options.bcc, 'BCC'),
 					attachments: listOrUndefined(options.attachments, 'Attachments'),
@@ -178,6 +182,7 @@ export async function executeMessageOperation(
 					color: options.color || undefined,
 					tag: options.tag || undefined,
 					badge: options.badge,
+					channelId: options.channelId || undefined,
 					draft: options.draft,
 					scheduledAt: options.scheduledAt || undefined,
 					contentAvailable: options.contentAvailable,
@@ -340,6 +345,7 @@ export async function executeMessageOperation(
 					topics: listOrUndefined(updateFields.topics, 'Topic IDs'),
 					users: listOrUndefined(updateFields.users, 'User IDs'),
 					targets: listOrUndefined(updateFields.targets, 'Target IDs'),
+					emails: listOrUndefined(updateFields.emails, 'Emails'),
 					subject: updateFields.subject || undefined,
 					content: updateFields.content || undefined,
 					draft: updateFields.draft,
@@ -380,6 +386,7 @@ export async function executeMessageOperation(
 					color: updateFields.color || undefined,
 					tag: updateFields.tag || undefined,
 					badge: updateFields.badge,
+					channelId: updateFields.channelId || undefined,
 					draft: updateFields.draft,
 					scheduledAt: updateFields.scheduledAt || undefined,
 					contentAvailable: updateFields.contentAvailable,
