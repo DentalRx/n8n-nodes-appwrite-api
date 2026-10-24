@@ -388,7 +388,7 @@ describe('URLs for the browser', () => {
 		expect(queryKeys(url).filter((key) => !accepted.includes(key))).toEqual(['project']);
 	});
 
-	it('offer exactly the providers of the OAuthProvider enum of Appwrite 2.3', () => {
+	it('offer exactly the providers of the OAuthProvider enum of Appwrite 2.6', () => {
 		const provider = node.description.properties.find(
 			(property) =>
 				property.name === 'oauth2Provider' &&
@@ -440,6 +440,7 @@ describe('URLs for the browser', () => {
 				'tradeshift',
 				'tradeshiftBox',
 				'twitch',
+				'webflow',
 				'wordpress',
 				'x',
 				'yahoo',

@@ -12,6 +12,8 @@ export interface PlatformType {
 	/** The platform type Appwrite uses in paths and in the `type` field. */
 	value: string;
 	name: string;
+	/** Whether the type also takes a list of signing certificate fingerprints. */
+	fingerprints?: boolean;
 	identifier: {
 		/** The key Appwrite expects in the request body. */
 		body: string;
@@ -21,10 +23,22 @@ export interface PlatformType {
 	};
 }
 
+/** Android's SHA-256 signing certificate fingerprints, which passkeys created in the app are matched against. */
+export const fingerprints: INodeProperties = {
+	displayName: 'Fingerprints',
+	name: 'platformFingerprints',
+	type: 'string',
+	default: '',
+	placeholder: 'e.g. 14:6D:E9:...:2B:6A',
+	description:
+		'SHA-256 fingerprints of the certificates your app is signed with, as a comma-separated list or a JSON array. Passkeys created in the app are accepted when its signature matches one. Find them under App signing in Play Console, or with ./gradlew signingReport.',
+};
+
 export const PLATFORM_TYPES: PlatformType[] = [
 	{
 		value: 'android',
 		name: 'Android',
+		fingerprints: true,
 		identifier: {
 			body: 'applicationId',
 			displayName: 'Package Name',
@@ -189,6 +203,10 @@ export const platformFields: INodeProperties[] = [
 			'The ID for the platform. Leave empty (or use unique()) to auto-generate a unique ID. Allowed characters: a-z, A-Z, 0-9, period, hyphen, underscore; must not start with a special character.',
 		displayOptions: { show: show('create') },
 	},
+	...PLATFORM_TYPES.filter((type) => type.fingerprints).map((type): INodeProperties => ({
+		...fingerprints,
+		displayOptions: { show: show('create', type) },
+	})),
 	// One Update Fields collection per type, so the identifier carries the
 	// label and description of the chosen kind of app.
 	...PLATFORM_TYPES.map((type): INodeProperties => ({
@@ -199,8 +217,8 @@ export const platformFields: INodeProperties[] = [
 		default: {},
 		description: 'The settings to change. Settings you do not add keep their current values.',
 		displayOptions: { show: show('update', type) },
-		options: [identifier(type), updatedName].sort((a, b) =>
-			a.displayName.localeCompare(b.displayName),
+		options: [identifier(type), updatedName, ...(type.fingerprints ? [fingerprints] : [])].sort(
+			(a, b) => a.displayName.localeCompare(b.displayName),
 		),
 	})),
 	...returnAllAndLimitProperties('platform', ['getMany']),

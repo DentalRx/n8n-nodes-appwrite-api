@@ -1,6 +1,6 @@
 {
 	"source": "https://github.com/appwrite/specs",
-	"version": "2.3.0",
+	"version": "2.6.2",
 	"operations": {
 		"DELETE /account/consents/{consentId}": {
 			"id": "accountDeleteConsent",
@@ -54,9 +54,23 @@
 				}
 			]
 		},
+		"DELETE /account/passkeys/{passkeyId}": {
+			"id": "accountDeletePasskey",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "accountDeletePasskey",
+					"required": []
+				}
+			]
+		},
 		"DELETE /account/sessions": {
 			"id": "accountDeleteSessions",
-			"query": {},
+			"query": {
+				"current": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -74,6 +88,18 @@
 			"variants": [
 				{
 					"name": "accountDeleteSession",
+					"required": []
+				}
+			]
+		},
+		"DELETE /analytics/properties/{propertyId}": {
+			"id": "analyticsDeleteProperty",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "analyticsDeleteProperty",
 					"required": []
 				}
 			]
@@ -134,6 +160,18 @@
 			"variants": [
 				{
 					"name": "appsDeleteTokens",
+					"required": []
+				}
+			]
+		},
+		"DELETE /avatars/photo": {
+			"id": "avatarsDeletePhoto",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "avatarsDeletePhoto",
 					"required": []
 				}
 			]
@@ -455,6 +493,18 @@
 				}
 			]
 		},
+		"DELETE /migrations/{migrationId}": {
+			"id": "migrationsDelete",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsDelete",
+					"required": []
+				}
+			]
+		},
 		"DELETE /mongo/{databaseId}": {
 			"id": "mongoDelete",
 			"query": {},
@@ -691,6 +741,18 @@
 			"variants": [
 				{
 					"name": "projectDelete",
+					"required": []
+				}
+			]
+		},
+		"DELETE /project/environments/{environmentId}": {
+			"id": "projectDeleteEnvironment",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "projectDeleteEnvironment",
 					"required": []
 				}
 			]
@@ -1016,6 +1078,18 @@
 				}
 			]
 		},
+		"DELETE /users/{userId}/passkeys/{passkeyId}": {
+			"id": "usersDeletePasskey",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "usersDeletePasskey",
+					"required": []
+				}
+			]
+		},
 		"DELETE /users/{userId}/sessions": {
 			"id": "usersDeleteSessions",
 			"query": {},
@@ -1246,6 +1320,21 @@
 				}
 			]
 		},
+		"GET /account/memberships": {
+			"id": "accountListMemberships",
+			"query": {
+				"queries": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "accountListMemberships",
+					"required": []
+				}
+			]
+		},
 		"GET /account/mfa/factors": {
 			"id": "accountListMfaFactors",
 			"query": {},
@@ -1278,6 +1367,33 @@
 				}
 			]
 		},
+		"GET /account/passkeys": {
+			"id": "accountListPasskeys",
+			"query": {
+				"queries": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "accountListPasskeys",
+					"required": []
+				}
+			]
+		},
+		"GET /account/passkeys/{passkeyId}": {
+			"id": "accountGetPasskey",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "accountGetPasskey",
+					"required": []
+				}
+			]
+		},
 		"GET /account/prefs": {
 			"id": "accountGetPrefs",
 			"query": {},
@@ -1292,7 +1408,9 @@
 		},
 		"GET /account/sessions": {
 			"id": "accountListSessions",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -1319,7 +1437,8 @@
 			"query": {
 				"success": null,
 				"failure": null,
-				"scopes": null
+				"scopes": null,
+				"state": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -1333,7 +1452,8 @@
 		"GET /activities/events": {
 			"id": "activitiesListEvents",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -1352,6 +1472,83 @@
 			"variants": [
 				{
 					"name": "activitiesGetEvent",
+					"required": []
+				}
+			]
+		},
+		"GET /analytics/properties": {
+			"id": "analyticsListProperties",
+			"query": {
+				"queries": null,
+				"search": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "analyticsListProperties",
+					"required": []
+				}
+			]
+		},
+		"GET /analytics/properties/{propertyId}": {
+			"id": "analyticsGetProperty",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "analyticsGetProperty",
+					"required": []
+				}
+			]
+		},
+		"GET /analytics/properties/{propertyId}/metrics": {
+			"id": "analyticsListMetrics",
+			"query": {
+				"queries": null,
+				"interval": [
+					"1h",
+					"1d",
+					"1w",
+					"1m"
+				],
+				"dimensions": [
+					"country",
+					"region",
+					"city",
+					"browser",
+					"operatingSystem",
+					"device",
+					"screenSize",
+					"referrerSource",
+					"channel",
+					"utmSource",
+					"utmMedium",
+					"utmCampaign",
+					"utmContent",
+					"utmTerm",
+					"page",
+					"hostname",
+					"entryPage",
+					"exitPage",
+					"trafficType",
+					"botName",
+					"botCategory",
+					"eventName"
+				],
+				"dateRange": null,
+				"startAt": null,
+				"endAt": null,
+				"limit": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "analyticsListMetrics",
 					"required": []
 				}
 			]
@@ -2117,7 +2314,8 @@
 		"GET /backups/archives": {
 			"id": "backupsListArchives",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2143,7 +2341,8 @@
 		"GET /backups/policies": {
 			"id": "backupsListPolicies",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2169,7 +2368,8 @@
 		"GET /backups/restorations": {
 			"id": "backupsListRestorations",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2348,7 +2548,8 @@
 			"id": "databasesListTransactions",
 			"deprecated": true,
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2541,7 +2742,8 @@
 		"GET /documentsdb/transactions": {
 			"id": "documentsDBListTransactions",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2568,7 +2770,8 @@
 			"id": "domainsList",
 			"query": {
 				"queries": null,
-				"search": null
+				"search": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2666,7 +2869,8 @@
 		"GET /domains/{domainId}/records": {
 			"id": "domainsListRecords",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2891,7 +3095,9 @@
 		"GET /functions/runtimes": {
 			"id": "functionsListRuntimes",
 			"publicOnly": true,
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -2904,7 +3110,8 @@
 		"GET /functions/specifications": {
 			"id": "functionsListSpecifications",
 			"query": {
-				"type": null
+				"type": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -2929,7 +3136,9 @@
 		},
 		"GET /locale/codes": {
 			"id": "localeListCodes",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -2941,7 +3150,9 @@
 		},
 		"GET /locale/continents": {
 			"id": "localeListContinents",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -2953,7 +3164,9 @@
 		},
 		"GET /locale/countries": {
 			"id": "localeListCountries",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -2965,7 +3178,9 @@
 		},
 		"GET /locale/countries/eu": {
 			"id": "localeListCountriesEU",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -2977,7 +3192,9 @@
 		},
 		"GET /locale/countries/phones": {
 			"id": "localeListCountriesPhones",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -2989,7 +3206,9 @@
 		},
 		"GET /locale/currencies": {
 			"id": "localeListCurrencies",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -3001,7 +3220,9 @@
 		},
 		"GET /locale/languages": {
 			"id": "localeListLanguages",
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -3138,10 +3359,211 @@
 				}
 			]
 		},
+		"GET /migrations": {
+			"id": "migrationsList",
+			"query": {
+				"queries": null,
+				"search": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsList",
+					"required": []
+				}
+			]
+		},
+		"GET /migrations/{migrationId}": {
+			"id": "migrationsGet",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsGet",
+					"required": []
+				}
+			]
+		},
+		"GET /migrations/appwrite/report": {
+			"id": "migrationsGetAppwriteReport",
+			"query": {
+				"resources": [
+					"user",
+					"team",
+					"membership",
+					"auth-methods",
+					"policies",
+					"oauth2-provider",
+					"database",
+					"table",
+					"column",
+					"index",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"documentsdb",
+					"vectorsdb",
+					"bucket",
+					"file",
+					"function",
+					"deployment",
+					"environment-variable",
+					"provider",
+					"topic",
+					"subscriber",
+					"message",
+					"site",
+					"site-deployment",
+					"site-variable",
+					"platform",
+					"api-key",
+					"webhook",
+					"smtp",
+					"backup-policy",
+					"project-variable",
+					"project-protocols",
+					"project-labels",
+					"project-services",
+					"project-email-template",
+					"project-environment",
+					"rule"
+				],
+				"endpoint": null,
+				"projectID": null,
+				"key": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsGetAppwriteReport",
+					"required": [
+						"endpoint",
+						"key",
+						"projectID",
+						"resources"
+					]
+				}
+			]
+		},
+		"GET /migrations/firebase/report": {
+			"id": "migrationsGetFirebaseReport",
+			"query": {
+				"resources": [
+					"user",
+					"database",
+					"table",
+					"column",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"bucket",
+					"file"
+				],
+				"serviceAccount": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsGetFirebaseReport",
+					"required": [
+						"resources",
+						"serviceAccount"
+					]
+				}
+			]
+		},
+		"GET /migrations/nhost/report": {
+			"id": "migrationsGetNHostReport",
+			"query": {
+				"resources": [
+					"user",
+					"database",
+					"table",
+					"column",
+					"index",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"bucket",
+					"file"
+				],
+				"subdomain": null,
+				"region": null,
+				"adminSecret": null,
+				"database": null,
+				"username": null,
+				"password": null,
+				"port": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsGetNHostReport",
+					"required": [
+						"adminSecret",
+						"database",
+						"password",
+						"region",
+						"resources",
+						"subdomain",
+						"username"
+					]
+				}
+			]
+		},
+		"GET /migrations/supabase/report": {
+			"id": "migrationsGetSupabaseReport",
+			"query": {
+				"resources": [
+					"user",
+					"database",
+					"table",
+					"column",
+					"index",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"bucket",
+					"file"
+				],
+				"endpoint": null,
+				"apiKey": null,
+				"databaseHost": null,
+				"username": null,
+				"password": null,
+				"port": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsGetSupabaseReport",
+					"required": [
+						"apiKey",
+						"databaseHost",
+						"endpoint",
+						"password",
+						"resources",
+						"username"
+					]
+				}
+			]
+		},
 		"GET /mongo": {
 			"id": "mongoList",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3167,7 +3589,8 @@
 		"GET /mongo/{databaseId}/backups": {
 			"id": "mongoListBackups",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3193,7 +3616,8 @@
 		"GET /mongo/{databaseId}/backups/policies": {
 			"id": "mongoListBackupPolicies",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3324,7 +3748,8 @@
 		"GET /mysql": {
 			"id": "mysqlList",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3350,7 +3775,8 @@
 		"GET /mysql/{databaseId}/backups": {
 			"id": "mysqlListBackups",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3376,7 +3802,8 @@
 		"GET /mysql/{databaseId}/backups/policies": {
 			"id": "mysqlListBackupPolicies",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3725,7 +4152,8 @@
 		"GET /postgresql": {
 			"id": "postgresqlList",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3751,7 +4179,8 @@
 		"GET /postgresql/{databaseId}/backups": {
 			"id": "postgresqlListBackups",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3777,7 +4206,8 @@
 		"GET /postgresql/{databaseId}/backups/policies": {
 			"id": "postgresqlListBackupPolicies",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -3965,6 +4395,33 @@
 			"variants": [
 				{
 					"name": "projectGet",
+					"required": []
+				}
+			]
+		},
+		"GET /project/environments": {
+			"id": "projectListEnvironments",
+			"query": {
+				"queries": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "projectListEnvironments",
+					"required": []
+				}
+			]
+		},
+		"GET /project/environments/{environmentId}": {
+			"id": "projectGetEnvironment",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "projectGetEnvironment",
 					"required": []
 				}
 			]
@@ -4504,7 +4961,9 @@
 		"GET /sites/frameworks": {
 			"id": "sitesListFrameworks",
 			"publicOnly": true,
-			"query": {},
+			"query": {
+				"total": null
+			},
 			"body": {},
 			"bodyTypes": {},
 			"variants": [
@@ -4517,7 +4976,8 @@
 		"GET /sites/specifications": {
 			"id": "sitesListSpecifications",
 			"query": {
-				"type": null
+				"type": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -4877,7 +5337,8 @@
 		"GET /tablesdb/transactions": {
 			"id": "tablesDBListTransactions",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -5106,6 +5567,33 @@
 				},
 				{
 					"name": "getMFARecoveryCodes",
+					"required": []
+				}
+			]
+		},
+		"GET /users/{userId}/passkeys": {
+			"id": "usersListPasskeys",
+			"query": {
+				"queries": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "usersListPasskeys",
+					"required": []
+				}
+			]
+		},
+		"GET /users/{userId}/passkeys/{passkeyId}": {
+			"id": "usersGetPasskey",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "usersGetPasskey",
 					"required": []
 				}
 			]
@@ -5348,7 +5836,8 @@
 		"GET /vectorsdb/transactions": {
 			"id": "vectorsDBListTransactions",
 			"query": {
-				"queries": null
+				"queries": null,
+				"total": null
 			},
 			"body": {},
 			"bodyTypes": {},
@@ -5499,6 +5988,24 @@
 				}
 			]
 		},
+		"PATCH /account/passkeys/{passkeyId}": {
+			"id": "accountUpdatePasskey",
+			"query": {},
+			"body": {
+				"name": null
+			},
+			"bodyTypes": {
+				"name": "string"
+			},
+			"variants": [
+				{
+					"name": "accountUpdatePasskey",
+					"required": [
+						"name"
+					]
+				}
+			]
+		},
 		"PATCH /account/password": {
 			"id": "accountUpdatePassword",
 			"query": {},
@@ -5582,6 +6089,28 @@
 				}
 			]
 		},
+		"PATCH /analytics/properties/{propertyId}": {
+			"id": "analyticsUpdateProperty",
+			"query": {},
+			"body": {
+				"name": null,
+				"domain": null,
+				"enabled": null,
+				"allowedOrigins": null
+			},
+			"bodyTypes": {
+				"name": "string?",
+				"domain": "string?",
+				"enabled": "boolean?",
+				"allowedOrigins": "array?"
+			},
+			"variants": [
+				{
+					"name": "analyticsUpdateProperty",
+					"required": []
+				}
+			]
+		},
 		"PATCH /apps/{appId}/team": {
 			"id": "appsUpdateTeam",
 			"query": {},
@@ -5631,14 +6160,16 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5657,12 +6188,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "boolean?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5681,12 +6214,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5705,12 +6240,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5730,13 +6267,15 @@
 				"elements": null,
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"elements": "array",
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5758,14 +6297,16 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"min": "number?",
 				"max": "number?",
 				"default": "number?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5786,14 +6327,16 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5812,12 +6355,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5836,12 +6381,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "array?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5859,12 +6406,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5883,12 +6432,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5907,12 +6458,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "array?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5930,12 +6483,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "array?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5956,11 +6511,13 @@
 					"restrict",
 					"setNull"
 				],
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"onDelete": "string",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -5977,13 +6534,15 @@
 				"required": null,
 				"default": null,
 				"size": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
 				"size": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -6002,12 +6561,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -6026,12 +6587,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -6051,13 +6614,15 @@
 				"required": null,
 				"default": null,
 				"size": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
 				"size": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -6359,10 +6924,11 @@
 				"html": null,
 				"cc": null,
 				"bcc": null,
+				"scheduledAt": null,
+				"attachments": null,
 				"replyToEmail": null,
 				"replyToName": null,
-				"scheduledAt": null,
-				"attachments": null
+				"emails": null
 			},
 			"bodyTypes": {
 				"topics": "array?",
@@ -6374,10 +6940,11 @@
 				"html": "boolean?",
 				"cc": "array?",
 				"bcc": "array?",
+				"scheduledAt": "string?",
+				"attachments": "array?",
 				"replyToEmail": "string?",
 				"replyToName": "string?",
-				"scheduledAt": "string?",
-				"attachments": "array?"
+				"emails": "array?"
 			},
 			"variants": [
 				{
@@ -6410,7 +6977,8 @@
 				"priority": [
 					"normal",
 					"high"
-				]
+				],
+				"channelId": null
 			},
 			"bodyTypes": {
 				"topics": "array?",
@@ -6430,7 +6998,8 @@
 				"scheduledAt": "string?",
 				"contentAvailable": "boolean?",
 				"critical": "boolean?",
-				"priority": "string?"
+				"priority": "string?",
+				"channelId": "string?"
 			},
 			"variants": [
 				{
@@ -6842,17 +7411,31 @@
 				"name": null,
 				"subscribe": null,
 				"qos": null,
-				"expiry": null
+				"expiry": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string?",
 				"subscribe": "array?",
 				"qos": "integer?",
-				"expiry": "integer?"
+				"expiry": "integer?",
+				"description": "string?"
 			},
 			"variants": [
 				{
 					"name": "messagingUpdateTopic",
+					"required": []
+				}
+			]
+		},
+		"PATCH /migrations/{migrationId}": {
+			"id": "migrationsRetry",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "migrationsRetry",
 					"required": []
 				}
 			]
@@ -7330,6 +7913,24 @@
 				}
 			]
 		},
+		"PATCH /project/environments/{environmentId}": {
+			"id": "projectUpdateEnvironment",
+			"query": {},
+			"body": {
+				"name": null
+			},
+			"bodyTypes": {
+				"name": "string"
+			},
+			"variants": [
+				{
+					"name": "projectUpdateEnvironment",
+					"required": [
+						"name"
+					]
+				}
+			]
+		},
 		"PATCH /project/oauth2/amazon": {
 			"id": "projectUpdateOAuth2Amazon",
 			"query": {},
@@ -7358,8 +7959,8 @@
 				"keyId": null,
 				"teamId": null,
 				"p8File": null,
-				"nativeClientIds": null,
 				"enabled": null,
+				"nativeClientIds": null,
 				"nativeEnabled": null
 			},
 			"bodyTypes": {
@@ -7367,8 +7968,8 @@
 				"keyId": "string?",
 				"teamId": "string?",
 				"p8File": "string?",
-				"nativeClientIds": "array?",
 				"enabled": "boolean?",
+				"nativeClientIds": "array?",
 				"nativeEnabled": "boolean?"
 			},
 			"variants": [
@@ -7405,13 +8006,19 @@
 				"clientId": null,
 				"clientSecret": null,
 				"endpoint": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"none",
+					"login",
+					"consent"
+				]
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
 				"endpoint": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -7568,12 +8175,17 @@
 			"body": {
 				"clientId": null,
 				"clientSecret": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"none",
+					"consent"
+				]
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -7710,12 +8322,16 @@
 			"body": {
 				"clientId": null,
 				"clientSecret": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"select_account"
+				]
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -7757,16 +8373,16 @@
 					"consent",
 					"select_account"
 				],
-				"nativeClientIds": null,
 				"enabled": null,
+				"nativeClientIds": null,
 				"nativeEnabled": null
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
 				"prompt": "array?",
-				"nativeClientIds": "array?",
 				"enabled": "boolean?",
+				"nativeClientIds": "array?",
 				"nativeEnabled": "boolean?"
 			},
 			"variants": [
@@ -7802,12 +8418,19 @@
 			"body": {
 				"clientId": null,
 				"clientSecret": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"none",
+					"login",
+					"create",
+					"select_account"
+				]
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -7887,13 +8510,20 @@
 				"applicationId": null,
 				"applicationSecret": null,
 				"tenant": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"none",
+					"login",
+					"consent",
+					"select_account"
+				]
 			},
 			"bodyTypes": {
 				"applicationId": "string?",
 				"applicationSecret": "string?",
 				"tenant": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -7967,14 +8597,20 @@
 				"clientSecret": null,
 				"domain": null,
 				"authorizationServerId": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"none",
+					"login",
+					"consent"
+				]
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
 				"domain": "string?",
 				"authorizationServerId": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -8069,12 +8705,17 @@
 			"body": {
 				"customerKey": null,
 				"customerSecret": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"login",
+					"consent"
+				]
 			},
 			"bodyTypes": {
 				"customerKey": "string?",
 				"customerSecret": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -8223,6 +8864,26 @@
 				}
 			]
 		},
+		"PATCH /project/oauth2/webflow": {
+			"id": "projectUpdateOAuth2Webflow",
+			"query": {},
+			"body": {
+				"clientId": null,
+				"clientSecret": null,
+				"enabled": null
+			},
+			"bodyTypes": {
+				"clientId": "string?",
+				"clientSecret": "string?",
+				"enabled": "boolean?"
+			},
+			"variants": [
+				{
+					"name": "projectUpdateOAuth2Webflow",
+					"required": []
+				}
+			]
+		},
 		"PATCH /project/oauth2/wordpress": {
 			"id": "projectUpdateOAuth2WordPress",
 			"query": {},
@@ -8309,12 +8970,16 @@
 			"body": {
 				"clientId": null,
 				"clientSecret": null,
-				"enabled": null
+				"enabled": null,
+				"prompt": [
+					"consent"
+				]
 			},
 			"bodyTypes": {
 				"clientId": "string?",
 				"clientSecret": "string?",
-				"enabled": "boolean?"
+				"enabled": "boolean?",
+				"prompt": "array?"
 			},
 			"variants": [
 				{
@@ -8463,14 +9128,34 @@
 				}
 			]
 		},
+		"PATCH /project/policies/passkey": {
+			"id": "projectUpdatePasskeyPolicy",
+			"query": {},
+			"body": {
+				"rpId": null
+			},
+			"bodyTypes": {
+				"rpId": "string"
+			},
+			"variants": [
+				{
+					"name": "projectUpdatePasskeyPolicy",
+					"required": [
+						"rpId"
+					]
+				}
+			]
+		},
 		"PATCH /project/policies/password-dictionary": {
 			"id": "projectUpdatePasswordDictionaryPolicy",
 			"query": {},
 			"body": {
-				"enabled": null
+				"enabled": null,
+				"denyList": null
 			},
 			"bodyTypes": {
-				"enabled": "boolean"
+				"enabled": "boolean",
+				"denyList": "array?"
 			},
 			"variants": [
 				{
@@ -8503,10 +9188,12 @@
 			"id": "projectUpdatePasswordPersonalDataPolicy",
 			"query": {},
 			"body": {
-				"enabled": null
+				"enabled": null,
+				"denyList": null
 			},
 			"bodyTypes": {
-				"enabled": "boolean"
+				"enabled": "boolean",
+				"denyList": "array?"
 			},
 			"variants": [
 				{
@@ -8533,6 +9220,24 @@
 			"variants": [
 				{
 					"name": "projectUpdatePasswordPwnedPolicy",
+					"required": []
+				}
+			]
+		},
+		"PATCH /project/policies/password-rotation": {
+			"id": "projectUpdatePasswordRotationPolicy",
+			"query": {},
+			"body": {
+				"enabled": null,
+				"maxAge": null
+			},
+			"bodyTypes": {
+				"enabled": "boolean",
+				"maxAge": "integer"
+			},
+			"variants": [
+				{
+					"name": "projectUpdatePasswordRotationPolicy",
 					"required": []
 				}
 			]
@@ -8948,14 +9653,16 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -8973,12 +9680,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "boolean?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -8996,12 +9705,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9019,12 +9730,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9043,13 +9756,15 @@
 				"elements": null,
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"elements": "array",
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9070,14 +9785,16 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"min": "number?",
 				"max": "number?",
 				"default": "number?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9097,14 +9814,16 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9122,12 +9841,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9145,12 +9866,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "array?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9167,12 +9890,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9190,12 +9915,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9213,12 +9940,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "array?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9235,12 +9964,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "array?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9260,11 +9991,13 @@
 					"restrict",
 					"setNull"
 				],
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"onDelete": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9281,13 +10014,15 @@
 				"required": null,
 				"default": null,
 				"size": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
 				"size": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9305,12 +10040,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9328,12 +10065,14 @@
 			"body": {
 				"required": null,
 				"default": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9352,13 +10091,15 @@
 				"required": null,
 				"default": null,
 				"size": null,
-				"newKey": null
+				"newKey": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"required": "boolean",
 				"default": "string?",
 				"size": "integer?",
-				"newKey": "string?"
+				"newKey": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -9618,6 +10359,24 @@
 				}
 			]
 		},
+		"PATCH /users/{userId}/passkeys/{passkeyId}": {
+			"id": "usersUpdatePasskey",
+			"query": {},
+			"body": {
+				"name": null
+			},
+			"bodyTypes": {
+				"name": "string"
+			},
+			"variants": [
+				{
+					"name": "usersUpdatePasskey",
+					"required": [
+						"name"
+					]
+				}
+			]
+		},
 		"PATCH /users/{userId}/password": {
 			"id": "usersUpdatePassword",
 			"query": {},
@@ -9823,7 +10582,7 @@
 				"description": "string?",
 				"priority": "integer?",
 				"enabled": "boolean?",
-				"conditions": "string?"
+				"conditions": "array?"
 			},
 			"variants": [
 				{
@@ -9855,7 +10614,7 @@
 				"challengeType": "string?",
 				"priority": "integer?",
 				"enabled": "boolean?",
-				"conditions": "string?",
+				"conditions": "array?",
 				"difficulty": "integer?",
 				"ttl": "integer?"
 			},
@@ -9885,7 +10644,7 @@
 				"description": "string?",
 				"priority": "integer?",
 				"enabled": "boolean?",
-				"conditions": "string?"
+				"conditions": "array?"
 			},
 			"variants": [
 				{
@@ -9921,7 +10680,7 @@
 				"maxBucketSize": "integer?",
 				"priority": "integer?",
 				"enabled": "boolean?",
-				"conditions": "string?"
+				"conditions": "array?"
 			},
 			"variants": [
 				{
@@ -9953,7 +10712,7 @@
 				"statusCode": "integer?",
 				"priority": "integer?",
 				"enabled": "boolean?",
-				"conditions": "string?"
+				"conditions": "array?"
 			},
 			"variants": [
 				{
@@ -10066,6 +10825,24 @@
 				}
 			]
 		},
+		"POST /account/passkeys": {
+			"id": "accountCreatePasskey",
+			"query": {},
+			"body": {
+				"passkeyId": null,
+				"name": null
+			},
+			"bodyTypes": {
+				"passkeyId": "string",
+				"name": "string"
+			},
+			"variants": [
+				{
+					"name": "accountCreatePasskey",
+					"required": []
+				}
+			]
+		},
 		"POST /account/recovery": {
 			"id": "accountCreateRecovery",
 			"query": {},
@@ -10124,11 +10901,13 @@
 			"query": {},
 			"body": {
 				"email": null,
-				"password": null
+				"password": null,
+				"duration": null
 			},
 			"bodyTypes": {
 				"email": "string",
-				"password": "string"
+				"password": "string",
+				"duration": "integer?"
 			},
 			"variants": [
 				{
@@ -10241,6 +11020,18 @@
 				}
 			]
 		},
+		"POST /account/tokens/passkey": {
+			"id": "accountCreatePasskeyToken",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "accountCreatePasskeyToken",
+					"required": []
+				}
+			]
+		},
 		"POST /account/tokens/phone": {
 			"id": "accountCreatePhoneToken",
 			"query": {},
@@ -10311,6 +11102,74 @@
 				{
 					"name": "accountCreatePhoneVerification",
 					"required": []
+				}
+			]
+		},
+		"POST /analytics/properties": {
+			"id": "analyticsCreateProperty",
+			"query": {},
+			"body": {
+				"propertyId": null,
+				"name": null,
+				"domain": null,
+				"enabled": null,
+				"allowedOrigins": null
+			},
+			"bodyTypes": {
+				"propertyId": "string",
+				"name": "string",
+				"domain": "string",
+				"enabled": "boolean",
+				"allowedOrigins": "array"
+			},
+			"variants": [
+				{
+					"name": "analyticsCreateProperty",
+					"required": [
+						"name",
+						"propertyId"
+					]
+				}
+			]
+		},
+		"POST /analytics/properties/{propertyId}/events": {
+			"id": "analyticsCreateEvent",
+			"query": {},
+			"body": {
+				"name": null,
+				"url": null,
+				"domain": null,
+				"referrer": null,
+				"screenWidth": null,
+				"sessionHash": null,
+				"scrollDepth": null,
+				"engagementTime": null,
+				"props": null,
+				"userId": null,
+				"ip": null,
+				"userAgent": null
+			},
+			"bodyTypes": {
+				"name": "string",
+				"url": "string",
+				"domain": "string",
+				"referrer": "string",
+				"screenWidth": "integer",
+				"sessionHash": "string",
+				"scrollDepth": "integer",
+				"engagementTime": "integer",
+				"props": "array",
+				"userId": "string",
+				"ip": "string",
+				"userAgent": "string"
+			},
+			"variants": [
+				{
+					"name": "analyticsCreateEvent",
+					"required": [
+						"name",
+						"url"
+					]
 				}
 			]
 		},
@@ -10515,12 +11374,14 @@
 			"body": {
 				"databaseId": null,
 				"name": null,
-				"enabled": null
+				"enabled": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"databaseId": "string",
 				"name": "string",
-				"enabled": "boolean"
+				"enabled": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10543,7 +11404,8 @@
 				"documentSecurity": null,
 				"enabled": null,
 				"attributes": null,
-				"indexes": null
+				"indexes": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"collectionId": "string",
@@ -10552,7 +11414,8 @@
 				"documentSecurity": "boolean",
 				"enabled": "boolean",
 				"attributes": "array",
-				"indexes": "array"
+				"indexes": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10574,7 +11437,8 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -10582,7 +11446,8 @@
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10602,13 +11467,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "boolean?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10628,13 +11495,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10654,13 +11523,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10681,14 +11552,16 @@
 				"elements": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"elements": "array",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10711,7 +11584,8 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -10719,7 +11593,8 @@
 				"min": "number?",
 				"max": "number?",
 				"default": "number?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10741,7 +11616,8 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -10749,7 +11625,8 @@
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10769,13 +11646,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10794,12 +11673,14 @@
 			"body": {
 				"key": null,
 				"required": null,
-				"default": null
+				"default": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
-				"default": "array?"
+				"default": "array?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10820,14 +11701,16 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10848,14 +11731,16 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10874,12 +11759,14 @@
 			"body": {
 				"key": null,
 				"required": null,
-				"default": null
+				"default": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
-				"default": "array?"
+				"default": "array?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10898,12 +11785,14 @@
 			"body": {
 				"key": null,
 				"required": null,
-				"default": null
+				"default": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
-				"default": "array?"
+				"default": "array?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10934,7 +11823,8 @@
 					"cascade",
 					"restrict",
 					"setNull"
-				]
+				],
+				"description": null
 			},
 			"bodyTypes": {
 				"relatedCollectionId": "string",
@@ -10942,7 +11832,8 @@
 				"twoWay": "boolean",
 				"key": "string?",
 				"twoWayKey": "string?",
-				"onDelete": "string"
+				"onDelete": "string",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10964,7 +11855,8 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -10972,7 +11864,8 @@
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -10994,14 +11887,16 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -11021,13 +11916,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -11049,7 +11946,8 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -11057,7 +11955,8 @@
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -11104,6 +12003,29 @@
 				}
 			]
 		},
+		"POST /databases/{databaseId}/collections/{collectionId}/documents/query": {
+			"id": "databasesCreateQuery",
+			"deprecated": true,
+			"query": {},
+			"body": {
+				"queries": null,
+				"transactionId": null,
+				"total": null,
+				"ttl": null
+			},
+			"bodyTypes": {
+				"queries": "array",
+				"transactionId": "string?",
+				"total": "boolean",
+				"ttl": "integer"
+			},
+			"variants": [
+				{
+					"name": "databasesCreateQuery",
+					"required": []
+				}
+			]
+		},
 		"POST /databases/{databaseId}/collections/{collectionId}/indexes": {
 			"id": "databasesCreateIndex",
 			"deprecated": true,
@@ -11114,21 +12036,24 @@
 					"key",
 					"fulltext",
 					"unique",
-					"spatial"
+					"spatial",
+					"trigram"
 				],
 				"attributes": null,
 				"orders": [
 					"asc",
 					"desc"
 				],
-				"lengths": null
+				"lengths": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"type": "string",
 				"attributes": "array",
 				"orders": "array",
-				"lengths": "array"
+				"lengths": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -11182,6 +12107,7 @@
 				"databaseId": null,
 				"name": null,
 				"enabled": null,
+				"description": null,
 				"specification": null,
 				"replicas": null,
 				"syncMode": null
@@ -11190,6 +12116,7 @@
 				"databaseId": "string",
 				"name": "string",
 				"enabled": "boolean",
+				"description": "string",
 				"specification": "string",
 				"replicas": "integer",
 				"syncMode": "string?"
@@ -11214,7 +12141,8 @@
 				"documentSecurity": null,
 				"enabled": null,
 				"attributes": null,
-				"indexes": null
+				"indexes": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"collectionId": "string",
@@ -11223,7 +12151,8 @@
 				"documentSecurity": "boolean",
 				"enabled": "boolean",
 				"attributes": "array",
-				"indexes": "array"
+				"indexes": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -11268,6 +12197,28 @@
 				}
 			]
 		},
+		"POST /documentsdb/{databaseId}/collections/{collectionId}/documents/query": {
+			"id": "documentsDBCreateQuery",
+			"query": {},
+			"body": {
+				"queries": null,
+				"transactionId": null,
+				"total": null,
+				"ttl": null
+			},
+			"bodyTypes": {
+				"queries": "array",
+				"transactionId": "string",
+				"total": "boolean",
+				"ttl": "integer"
+			},
+			"variants": [
+				{
+					"name": "documentsDBCreateQuery",
+					"required": []
+				}
+			]
+		},
 		"POST /documentsdb/{databaseId}/collections/{collectionId}/indexes": {
 			"id": "documentsDBCreateIndex",
 			"query": {},
@@ -11283,14 +12234,16 @@
 					"asc",
 					"desc"
 				],
-				"lengths": null
+				"lengths": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"type": "string",
 				"attributes": "array",
 				"orders": "array",
-				"lengths": "array"
+				"lengths": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -11774,6 +12727,7 @@
 					"python-3.12",
 					"python-3.13",
 					"python-3.14",
+					"python-3.15",
 					"python-ml-3.11",
 					"python-ml-3.12",
 					"python-ml-3.13",
@@ -11785,6 +12739,7 @@
 					"deno-2.0",
 					"deno-2.5",
 					"deno-2.6",
+					"deno-2.9",
 					"dart-2.15",
 					"dart-2.16",
 					"dart-2.17",
@@ -11832,7 +12787,9 @@
 					"go-1.24",
 					"go-1.25",
 					"go-1.26",
+					"go-1.27",
 					"rust-1.83",
+					"rust-1.99",
 					"static-1",
 					"flutter-3.24",
 					"flutter-3.27",
@@ -11943,6 +12900,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -11974,7 +12932,9 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
 				],
 				"installationId": null,
 				"providerRepositoryId": null,
@@ -11985,7 +12945,9 @@
 				"providerPaths": null,
 				"buildSpecification": null,
 				"runtimeSpecification": null,
-				"deploymentRetention": null
+				"deploymentRetention": null,
+				"interval": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"functionId": "string",
@@ -12009,7 +12971,9 @@
 				"providerPaths": "array",
 				"buildSpecification": "string",
 				"runtimeSpecification": "string",
-				"deploymentRetention": "integer"
+				"deploymentRetention": "integer",
+				"interval": "integer",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -12170,13 +13134,15 @@
 				"variableId": null,
 				"key": null,
 				"value": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"variableId": "string",
 				"key": "string",
 				"value": "string",
-				"secret": "boolean"
+				"secret": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -12238,11 +13204,12 @@
 				"cc": null,
 				"bcc": null,
 				"attachments": null,
-				"replyToEmail": null,
-				"replyToName": null,
 				"draft": null,
 				"html": null,
-				"scheduledAt": null
+				"scheduledAt": null,
+				"replyToEmail": null,
+				"replyToName": null,
+				"emails": null
 			},
 			"bodyTypes": {
 				"messageId": "string",
@@ -12253,12 +13220,13 @@
 				"targets": "array",
 				"cc": "array",
 				"bcc": "array",
-				"attachments": "array",
-				"replyToEmail": "string",
-				"replyToName": "string",
+				"attachments": "array?",
 				"draft": "boolean",
 				"html": "boolean",
-				"scheduledAt": "string?"
+				"scheduledAt": "string?",
+				"replyToEmail": "string",
+				"replyToName": "string",
+				"emails": "array"
 			},
 			"variants": [
 				{
@@ -12296,7 +13264,8 @@
 				"priority": [
 					"normal",
 					"high"
-				]
+				],
+				"channelId": null
 			},
 			"bodyTypes": {
 				"messageId": "string",
@@ -12317,7 +13286,8 @@
 				"scheduledAt": "string?",
 				"contentAvailable": "boolean",
 				"critical": "boolean",
-				"priority": "string"
+				"priority": "string",
+				"channelId": "string"
 			},
 			"variants": [
 				{
@@ -12816,14 +13786,16 @@
 				"name": null,
 				"subscribe": null,
 				"qos": null,
-				"expiry": null
+				"expiry": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"topicId": "string",
 				"name": "string",
 				"subscribe": "array",
 				"qos": "integer?",
-				"expiry": "integer?"
+				"expiry": "integer?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -12852,6 +13824,347 @@
 					"required": [
 						"subscriberId",
 						"targetId"
+					]
+				}
+			]
+		},
+		"POST /migrations/appwrite": {
+			"id": "migrationsCreateAppwriteMigration",
+			"query": {},
+			"body": {
+				"resources": [
+					"user",
+					"team",
+					"membership",
+					"auth-methods",
+					"policies",
+					"oauth2-provider",
+					"database",
+					"table",
+					"column",
+					"index",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"documentsdb",
+					"vectorsdb",
+					"bucket",
+					"file",
+					"function",
+					"deployment",
+					"environment-variable",
+					"provider",
+					"topic",
+					"subscriber",
+					"message",
+					"site",
+					"site-deployment",
+					"site-variable",
+					"platform",
+					"api-key",
+					"webhook",
+					"smtp",
+					"backup-policy",
+					"project-variable",
+					"project-protocols",
+					"project-labels",
+					"project-services",
+					"project-email-template",
+					"project-environment",
+					"rule"
+				],
+				"endpoint": null,
+				"projectId": null,
+				"apiKey": null,
+				"onDuplicate": [
+					"fail",
+					"skip",
+					"overwrite"
+				]
+			},
+			"bodyTypes": {
+				"resources": "array",
+				"endpoint": "string",
+				"projectId": "string",
+				"apiKey": "string",
+				"onDuplicate": "string"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateAppwriteMigration",
+					"required": [
+						"apiKey",
+						"endpoint",
+						"projectId",
+						"resources"
+					]
+				}
+			]
+		},
+		"POST /migrations/csv/exports": {
+			"id": "migrationsCreateCSVExport",
+			"query": {},
+			"body": {
+				"databaseId": null,
+				"collectionId": null,
+				"filename": null,
+				"columns": null,
+				"queries": null,
+				"delimiter": null,
+				"enclosure": null,
+				"escape": null,
+				"header": null,
+				"notify": null
+			},
+			"bodyTypes": {
+				"databaseId": "string",
+				"collectionId": "string",
+				"filename": "string",
+				"columns": "array",
+				"queries": "array",
+				"delimiter": "string",
+				"enclosure": "string",
+				"escape": "string",
+				"header": "boolean",
+				"notify": "boolean"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateCSVExport",
+					"required": [
+						"collectionId",
+						"databaseId",
+						"filename"
+					]
+				}
+			]
+		},
+		"POST /migrations/csv/imports": {
+			"id": "migrationsCreateCSVImport",
+			"query": {},
+			"body": {
+				"bucketId": null,
+				"fileId": null,
+				"databaseId": null,
+				"collectionId": null,
+				"internalFile": null,
+				"onDuplicate": [
+					"fail",
+					"skip",
+					"overwrite"
+				]
+			},
+			"bodyTypes": {
+				"bucketId": "string",
+				"fileId": "string",
+				"databaseId": "string",
+				"collectionId": "string",
+				"internalFile": "boolean",
+				"onDuplicate": "string"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateCSVImport",
+					"required": [
+						"bucketId",
+						"collectionId",
+						"databaseId",
+						"fileId"
+					]
+				}
+			]
+		},
+		"POST /migrations/firebase": {
+			"id": "migrationsCreateFirebaseMigration",
+			"query": {},
+			"body": {
+				"resources": [
+					"user",
+					"database",
+					"table",
+					"column",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"bucket",
+					"file"
+				],
+				"serviceAccount": null
+			},
+			"bodyTypes": {
+				"resources": "array",
+				"serviceAccount": "string"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateFirebaseMigration",
+					"required": [
+						"resources",
+						"serviceAccount"
+					]
+				}
+			]
+		},
+		"POST /migrations/json/exports": {
+			"id": "migrationsCreateJSONExport",
+			"query": {},
+			"body": {
+				"databaseId": null,
+				"collectionId": null,
+				"filename": null,
+				"columns": null,
+				"queries": null,
+				"notify": null
+			},
+			"bodyTypes": {
+				"databaseId": "string",
+				"collectionId": "string",
+				"filename": "string",
+				"columns": "array",
+				"queries": "array",
+				"notify": "boolean"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateJSONExport",
+					"required": [
+						"collectionId",
+						"databaseId",
+						"filename"
+					]
+				}
+			]
+		},
+		"POST /migrations/json/imports": {
+			"id": "migrationsCreateJSONImport",
+			"query": {},
+			"body": {
+				"bucketId": null,
+				"fileId": null,
+				"databaseId": null,
+				"collectionId": null,
+				"internalFile": null,
+				"onDuplicate": [
+					"fail",
+					"skip",
+					"overwrite"
+				]
+			},
+			"bodyTypes": {
+				"bucketId": "string",
+				"fileId": "string",
+				"databaseId": "string",
+				"collectionId": "string",
+				"internalFile": "boolean",
+				"onDuplicate": "string"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateJSONImport",
+					"required": [
+						"bucketId",
+						"collectionId",
+						"databaseId",
+						"fileId"
+					]
+				}
+			]
+		},
+		"POST /migrations/nhost": {
+			"id": "migrationsCreateNHostMigration",
+			"query": {},
+			"body": {
+				"resources": [
+					"user",
+					"database",
+					"table",
+					"column",
+					"index",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"bucket",
+					"file"
+				],
+				"subdomain": null,
+				"region": null,
+				"adminSecret": null,
+				"database": null,
+				"username": null,
+				"password": null,
+				"port": null
+			},
+			"bodyTypes": {
+				"resources": "array",
+				"subdomain": "string",
+				"region": "string",
+				"adminSecret": "string",
+				"database": "string",
+				"username": "string",
+				"password": "string",
+				"port": "integer"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateNHostMigration",
+					"required": [
+						"adminSecret",
+						"database",
+						"password",
+						"region",
+						"resources",
+						"subdomain",
+						"username"
+					]
+				}
+			]
+		},
+		"POST /migrations/supabase": {
+			"id": "migrationsCreateSupabaseMigration",
+			"query": {},
+			"body": {
+				"resources": [
+					"user",
+					"database",
+					"table",
+					"column",
+					"index",
+					"row",
+					"document",
+					"attribute",
+					"collection",
+					"bucket",
+					"file"
+				],
+				"endpoint": null,
+				"apiKey": null,
+				"databaseHost": null,
+				"username": null,
+				"password": null,
+				"port": null
+			},
+			"bodyTypes": {
+				"resources": "array",
+				"endpoint": "string",
+				"apiKey": "string",
+				"databaseHost": "string",
+				"username": "string",
+				"password": "string",
+				"port": "integer"
+			},
+			"variants": [
+				{
+					"name": "migrationsCreateSupabaseMigration",
+					"required": [
+						"apiKey",
+						"databaseHost",
+						"endpoint",
+						"password",
+						"resources",
+						"username"
 					]
 				}
 			]
@@ -13009,17 +14322,35 @@
 				"type": null,
 				"backupId": null,
 				"targetDatabaseId": null,
-				"targetTime": null
+				"targetTime": null,
+				"restoreMode": null,
+				"targetName": null,
+				"autoPromote": null
 			},
 			"bodyTypes": {
 				"type": "string",
 				"backupId": "string?",
 				"targetDatabaseId": "string?",
-				"targetTime": "string?"
+				"targetTime": "string?",
+				"restoreMode": "string?",
+				"targetName": "string?",
+				"autoPromote": "boolean"
 			},
 			"variants": [
 				{
 					"name": "mongoCreateRestoration",
+					"required": []
+				}
+			]
+		},
+		"POST /mongo/{databaseId}/restorations/{restorationId}/promotions": {
+			"id": "mongoPromoteRestoration",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "mongoPromoteRestoration",
 					"required": []
 				}
 			]
@@ -13217,17 +14548,35 @@
 				"type": null,
 				"backupId": null,
 				"targetDatabaseId": null,
-				"targetTime": null
+				"targetTime": null,
+				"restoreMode": null,
+				"targetName": null,
+				"autoPromote": null
 			},
 			"bodyTypes": {
 				"type": "string",
 				"backupId": "string?",
 				"targetDatabaseId": "string?",
-				"targetTime": "string?"
+				"targetTime": "string?",
+				"restoreMode": "string?",
+				"targetName": "string?",
+				"autoPromote": "boolean"
 			},
 			"variants": [
 				{
 					"name": "mysqlCreateRestoration",
+					"required": []
+				}
+			]
+		},
+		"POST /mysql/{databaseId}/restorations/{restorationId}/promotions": {
+			"id": "mysqlPromoteRestoration",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "mysqlPromoteRestoration",
 					"required": []
 				}
 			]
@@ -13304,7 +14653,7 @@
 				"prompt": "string",
 				"max_age": "integer?",
 				"authorization_details": "string",
-				"resource": "string",
+				"resource": "array",
 				"audience": "string",
 				"request_uri": "string"
 			},
@@ -13330,7 +14679,7 @@
 				"client_id": "string",
 				"scope": "string",
 				"authorization_details": "string",
-				"resource": "string",
+				"resource": "array",
 				"audience": "string"
 			},
 			"variants": [
@@ -13354,6 +14703,30 @@
 					"name": "oauth2CreateGrant",
 					"required": [
 						"user_code"
+					]
+				}
+			]
+		},
+		"POST /oauth2/{project_id}/introspect": {
+			"id": "oauth2Introspect",
+			"query": {},
+			"body": {
+				"token": null,
+				"token_type_hint": null,
+				"client_id": null,
+				"client_secret": null
+			},
+			"bodyTypes": {
+				"token": "string",
+				"token_type_hint": "string",
+				"client_id": "string",
+				"client_secret": "string"
+			},
+			"variants": [
+				{
+					"name": "oauth2Introspect",
+					"required": [
+						"token"
 					]
 				}
 			]
@@ -13389,7 +14762,7 @@
 				"prompt": "string",
 				"max_age": "integer?",
 				"authorization_details": "string",
-				"resource": "string",
+				"resource": "array",
 				"audience": "string"
 			},
 			"variants": [
@@ -13471,7 +14844,7 @@
 				"client_secret": "string",
 				"code_verifier": "string",
 				"redirect_uri": "string",
-				"resource": "string",
+				"resource": "array",
 				"audience": "string"
 			},
 			"variants": [
@@ -13656,6 +15029,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -13687,7 +15061,9 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
 				],
 				"duration": null
 			},
@@ -13898,17 +15274,35 @@
 				"type": null,
 				"backupId": null,
 				"targetDatabaseId": null,
-				"targetTime": null
+				"targetTime": null,
+				"restoreMode": null,
+				"targetName": null,
+				"autoPromote": null
 			},
 			"bodyTypes": {
 				"type": "string",
 				"backupId": "string?",
 				"targetDatabaseId": "string?",
-				"targetTime": "string?"
+				"targetTime": "string?",
+				"restoreMode": "string?",
+				"targetName": "string?",
+				"autoPromote": "boolean"
 			},
 			"variants": [
 				{
 					"name": "postgresqlCreateRestoration",
+					"required": []
+				}
+			]
+		},
+		"POST /postgresql/{databaseId}/restorations/{restorationId}/promotions": {
+			"id": "postgresqlPromoteRestoration",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "postgresqlPromoteRestoration",
 					"required": []
 				}
 			]
@@ -13927,6 +15321,27 @@
 					"name": "postgresqlCreateUpgrade",
 					"required": [
 						"targetVersion"
+					]
+				}
+			]
+		},
+		"POST /project/environments": {
+			"id": "projectCreateEnvironment",
+			"query": {},
+			"body": {
+				"environmentId": null,
+				"name": null
+			},
+			"bodyTypes": {
+				"environmentId": "string",
+				"name": "string"
+			},
+			"variants": [
+				{
+					"name": "projectCreateEnvironment",
+					"required": [
+						"environmentId",
+						"name"
 					]
 				}
 			]
@@ -14026,6 +15441,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -14057,7 +15473,9 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
 				],
 				"duration": null
 			},
@@ -14102,12 +15520,14 @@
 			"body": {
 				"platformId": null,
 				"name": null,
-				"applicationId": null
+				"applicationId": null,
+				"fingerprints": null
 			},
 			"bodyTypes": {
 				"platformId": "string",
 				"name": "string",
-				"applicationId": "string"
+				"applicationId": "string",
+				"fingerprints": "array"
 			},
 			"variants": [
 				{
@@ -14241,13 +15661,15 @@
 				"variableId": null,
 				"key": null,
 				"value": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"variableId": "string",
 				"key": "string",
 				"value": "string",
-				"secret": "boolean"
+				"secret": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -14389,6 +15811,29 @@
 				}
 			]
 		},
+		"POST /proxy/rules/smtp": {
+			"id": "proxyCreateSMTPRule",
+			"query": {},
+			"body": {
+				"domain": null,
+				"functionId": null,
+				"branch": null
+			},
+			"bodyTypes": {
+				"domain": "string",
+				"functionId": "string",
+				"branch": "string"
+			},
+			"variants": [
+				{
+					"name": "proxyCreateSMTPRule",
+					"required": [
+						"domain",
+						"functionId"
+					]
+				}
+			]
+		},
 		"POST /sites": {
 			"id": "sitesCreate",
 			"query": {},
@@ -14450,6 +15895,7 @@
 					"python-3.12",
 					"python-3.13",
 					"python-3.14",
+					"python-3.15",
 					"python-ml-3.11",
 					"python-ml-3.12",
 					"python-ml-3.13",
@@ -14461,6 +15907,7 @@
 					"deno-2.0",
 					"deno-2.5",
 					"deno-2.6",
+					"deno-2.9",
 					"dart-2.15",
 					"dart-2.16",
 					"dart-2.17",
@@ -14508,7 +15955,9 @@
 					"go-1.24",
 					"go-1.25",
 					"go-1.26",
+					"go-1.27",
 					"rust-1.83",
+					"rust-1.99",
 					"static-1",
 					"flutter-3.24",
 					"flutter-3.27",
@@ -14626,6 +16075,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -14657,8 +16107,11 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
-				]
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
+				],
+				"description": null
 			},
 			"bodyTypes": {
 				"siteId": "string",
@@ -14684,7 +16137,8 @@
 				"buildSpecification": "string",
 				"runtimeSpecification": "string",
 				"deploymentRetention": "integer",
-				"scopes": "array"
+				"scopes": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -14812,13 +16266,15 @@
 				"variableId": null,
 				"key": null,
 				"value": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"variableId": "string",
 				"key": "string",
 				"value": "string",
-				"secret": "boolean"
+				"secret": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -14849,7 +16305,9 @@
 				],
 				"encryption": null,
 				"antivirus": null,
-				"transformations": null
+				"transformations": null,
+				"description": null,
+				"stripMetadata": null
 			},
 			"bodyTypes": {
 				"bucketId": "string",
@@ -14862,7 +16320,9 @@
 				"compression": "string",
 				"encryption": "boolean",
 				"antivirus": "boolean",
-				"transformations": "boolean"
+				"transformations": "boolean",
+				"description": "string",
+				"stripMetadata": "boolean"
 			},
 			"variants": [
 				{
@@ -14906,6 +16366,7 @@
 				"databaseId": null,
 				"name": null,
 				"enabled": null,
+				"description": null,
 				"specification": null,
 				"replicas": null,
 				"syncMode": null
@@ -14914,6 +16375,7 @@
 				"databaseId": "string",
 				"name": "string",
 				"enabled": "boolean",
+				"description": "string",
 				"specification": "string",
 				"replicas": "integer",
 				"syncMode": "string?"
@@ -14986,7 +16448,8 @@
 				"rowSecurity": null,
 				"enabled": null,
 				"columns": null,
-				"indexes": null
+				"indexes": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"tableId": "string",
@@ -14995,7 +16458,8 @@
 				"rowSecurity": "boolean",
 				"enabled": "boolean",
 				"columns": "array",
-				"indexes": "array"
+				"indexes": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15016,7 +16480,8 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -15024,7 +16489,8 @@
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15043,13 +16509,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "boolean?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15068,13 +16536,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15093,13 +16563,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15119,14 +16591,16 @@
 				"elements": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"elements": "array",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15148,7 +16622,8 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -15156,7 +16631,8 @@
 				"min": "number?",
 				"max": "number?",
 				"default": "number?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15177,7 +16653,8 @@
 				"min": null,
 				"max": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -15185,7 +16662,8 @@
 				"min": "integer?",
 				"max": "integer?",
 				"default": "integer?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15204,13 +16682,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15228,12 +16708,14 @@
 			"body": {
 				"key": null,
 				"required": null,
-				"default": null
+				"default": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
-				"default": "array?"
+				"default": "array?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15253,14 +16735,16 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15280,14 +16764,16 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15305,12 +16791,14 @@
 			"body": {
 				"key": null,
 				"required": null,
-				"default": null
+				"default": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
-				"default": "array?"
+				"default": "array?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15328,12 +16816,14 @@
 			"body": {
 				"key": null,
 				"required": null,
-				"default": null
+				"default": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
-				"default": "array?"
+				"default": "array?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15363,7 +16853,8 @@
 					"cascade",
 					"restrict",
 					"setNull"
-				]
+				],
+				"description": null
 			},
 			"bodyTypes": {
 				"relatedTableId": "string",
@@ -15371,7 +16862,8 @@
 				"twoWay": "boolean",
 				"key": "string?",
 				"twoWayKey": "string?",
-				"onDelete": "string"
+				"onDelete": "string",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15393,7 +16885,8 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -15401,7 +16894,8 @@
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15422,14 +16916,16 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15448,13 +16944,15 @@
 				"key": null,
 				"required": null,
 				"default": null,
-				"array": null
+				"array": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"required": "boolean",
 				"default": "string?",
-				"array": "boolean"
+				"array": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15475,7 +16973,8 @@
 				"required": null,
 				"default": null,
 				"array": null,
-				"encrypt": null
+				"encrypt": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
@@ -15483,7 +16982,8 @@
 				"required": "boolean",
 				"default": "string?",
 				"array": "boolean",
-				"encrypt": "boolean"
+				"encrypt": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15505,21 +17005,24 @@
 					"key",
 					"fulltext",
 					"unique",
-					"spatial"
+					"spatial",
+					"trigram"
 				],
 				"columns": null,
 				"orders": [
 					"asc",
 					"desc"
 				],
-				"lengths": null
+				"lengths": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"type": "string",
 				"columns": "array",
 				"orders": "array",
-				"lengths": "array"
+				"lengths": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -15562,6 +17065,28 @@
 					"required": [
 						"rows"
 					]
+				}
+			]
+		},
+		"POST /tablesdb/{databaseId}/tables/{tableId}/rows/query": {
+			"id": "tablesDBCreateQuery",
+			"query": {},
+			"body": {
+				"queries": null,
+				"transactionId": null,
+				"total": null,
+				"ttl": null
+			},
+			"bodyTypes": {
+				"queries": "array",
+				"transactionId": "string?",
+				"total": "boolean",
+				"ttl": "integer"
+			},
+			"variants": [
+				{
+					"name": "tablesDBCreateQuery",
+					"required": []
 				}
 			]
 		},
@@ -15649,7 +17174,8 @@
 				"phone": null,
 				"roles": null,
 				"url": null,
-				"name": null
+				"name": null,
+				"membershipId": null
 			},
 			"bodyTypes": {
 				"email": "string",
@@ -15657,7 +17183,8 @@
 				"phone": "string",
 				"roles": "array",
 				"url": "string",
-				"name": "string"
+				"name": "string",
+				"membershipId": "string"
 			},
 			"variants": [
 				{
@@ -15698,7 +17225,7 @@
 				"userId": "string",
 				"email": "string?",
 				"phone": "string?",
-				"password": "string",
+				"password": "string?",
 				"name": "string"
 			},
 			"variants": [
@@ -16017,6 +17544,7 @@
 				"databaseId": null,
 				"name": null,
 				"enabled": null,
+				"description": null,
 				"specification": null,
 				"replicas": null,
 				"syncMode": null
@@ -16025,6 +17553,7 @@
 				"databaseId": "string",
 				"name": "string",
 				"enabled": "boolean",
+				"description": "string",
 				"specification": "string",
 				"replicas": "integer",
 				"syncMode": "string?"
@@ -16048,7 +17577,8 @@
 				"dimension": null,
 				"permissions": null,
 				"documentSecurity": null,
-				"enabled": null
+				"enabled": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"collectionId": "string",
@@ -16056,7 +17586,8 @@
 				"dimension": "integer",
 				"permissions": "array",
 				"documentSecurity": "boolean",
-				"enabled": "boolean"
+				"enabled": "boolean",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -16142,14 +17673,16 @@
 					"asc",
 					"desc"
 				],
-				"lengths": null
+				"lengths": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string",
 				"type": "string",
 				"attributes": "array",
 				"orders": "array",
-				"lengths": "array"
+				"lengths": "array",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -16231,7 +17764,7 @@
 				"description": "string",
 				"priority": "integer",
 				"enabled": "boolean",
-				"conditions": "string"
+				"conditions": "array"
 			},
 			"variants": [
 				{
@@ -16269,7 +17802,7 @@
 				"challengeType": "string",
 				"priority": "integer",
 				"enabled": "boolean",
-				"conditions": "string",
+				"conditions": "array",
 				"difficulty": "integer",
 				"ttl": "integer"
 			},
@@ -16305,7 +17838,7 @@
 				"description": "string",
 				"priority": "integer",
 				"enabled": "boolean",
-				"conditions": "string"
+				"conditions": "array"
 			},
 			"variants": [
 				{
@@ -16349,7 +17882,7 @@
 				"maxBucketSize": "integer?",
 				"priority": "integer",
 				"enabled": "boolean",
-				"conditions": "string"
+				"conditions": "array"
 			},
 			"variants": [
 				{
@@ -16389,7 +17922,7 @@
 				"statusCode": "integer",
 				"priority": "integer",
 				"enabled": "boolean",
-				"conditions": "string"
+				"conditions": "array"
 			},
 			"variants": [
 				{
@@ -16416,7 +17949,8 @@
 				"tls": null,
 				"authUsername": null,
 				"authPassword": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"webhookId": "string",
@@ -16427,7 +17961,8 @@
 				"tls": "boolean",
 				"authUsername": "string",
 				"authPassword": "string",
-				"secret": "string?"
+				"secret": "string?",
+				"description": "string"
 			},
 			"variants": [
 				{
@@ -16489,6 +18024,24 @@
 					"required": [
 						"challengeId",
 						"otp"
+					]
+				}
+			]
+		},
+		"PUT /account/passkeys/{passkeyId}/verification": {
+			"id": "accountUpdatePasskeyVerification",
+			"query": {},
+			"body": {
+				"credential": null
+			},
+			"bodyTypes": {
+				"credential": "object"
+			},
+			"variants": [
+				{
+					"name": "accountUpdatePasskeyVerification",
+					"required": [
+						"credential"
 					]
 				}
 			]
@@ -16581,6 +18134,27 @@
 					"required": [
 						"secret",
 						"userId"
+					]
+				}
+			]
+		},
+		"PUT /account/tokens/passkey": {
+			"id": "accountUpdatePasskeyToken",
+			"query": {},
+			"body": {
+				"challengeId": null,
+				"credential": null
+			},
+			"bodyTypes": {
+				"challengeId": "string",
+				"credential": "object"
+			},
+			"variants": [
+				{
+					"name": "accountUpdatePasskeyToken",
+					"required": [
+						"challengeId",
+						"credential"
 					]
 				}
 			]
@@ -16730,17 +18304,37 @@
 				}
 			]
 		},
+		"PUT /avatars/photo": {
+			"id": "avatarsUpdatePhoto",
+			"query": {},
+			"body": {
+				"file": null
+			},
+			"bodyTypes": {
+				"file": "string"
+			},
+			"variants": [
+				{
+					"name": "avatarsUpdatePhoto",
+					"required": [
+						"file"
+					]
+				}
+			]
+		},
 		"PUT /databases/{databaseId}": {
 			"id": "databasesUpdate",
 			"deprecated": true,
 			"query": {},
 			"body": {
 				"name": null,
-				"enabled": null
+				"enabled": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
-				"enabled": "boolean"
+				"enabled": "boolean",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -16758,14 +18352,16 @@
 				"permissions": null,
 				"documentSecurity": null,
 				"enabled": null,
-				"purge": null
+				"purge": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"permissions": "array?",
 				"documentSecurity": "boolean",
 				"enabled": "boolean",
-				"purge": "boolean"
+				"purge": "boolean",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -16822,6 +18418,7 @@
 			"body": {
 				"name": null,
 				"enabled": null,
+				"description": null,
 				"specification": null,
 				"replicas": null,
 				"syncMode": null
@@ -16829,6 +18426,7 @@
 			"bodyTypes": {
 				"name": "string",
 				"enabled": "boolean",
+				"description": "string?",
 				"specification": "string?",
 				"replicas": "integer?",
 				"syncMode": "string?"
@@ -16850,14 +18448,16 @@
 				"permissions": null,
 				"documentSecurity": null,
 				"enabled": null,
-				"purge": null
+				"purge": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"permissions": "array",
 				"documentSecurity": "boolean",
 				"enabled": "boolean",
-				"purge": "boolean"
+				"purge": "boolean",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -17233,6 +18833,7 @@
 					"python-3.12",
 					"python-3.13",
 					"python-3.14",
+					"python-3.15",
 					"python-ml-3.11",
 					"python-ml-3.12",
 					"python-ml-3.13",
@@ -17244,6 +18845,7 @@
 					"deno-2.0",
 					"deno-2.5",
 					"deno-2.6",
+					"deno-2.9",
 					"dart-2.15",
 					"dart-2.16",
 					"dart-2.17",
@@ -17291,7 +18893,9 @@
 					"go-1.24",
 					"go-1.25",
 					"go-1.26",
+					"go-1.27",
 					"rust-1.83",
+					"rust-1.99",
 					"static-1",
 					"flutter-3.24",
 					"flutter-3.27",
@@ -17402,6 +19006,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -17433,7 +19038,9 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
 				],
 				"installationId": null,
 				"providerRepositoryId": null,
@@ -17444,7 +19051,10 @@
 				"providerPaths": null,
 				"buildSpecification": null,
 				"runtimeSpecification": null,
-				"deploymentRetention": null
+				"deploymentRetention": null,
+				"interval": null,
+				"description": null,
+				"emailEnabled": null
 			},
 			"bodyTypes": {
 				"name": "string",
@@ -17467,7 +19077,10 @@
 				"providerPaths": "array?",
 				"buildSpecification": "string?",
 				"runtimeSpecification": "string?",
-				"deploymentRetention": "integer"
+				"deploymentRetention": "integer",
+				"interval": "integer?",
+				"description": "string?",
+				"emailEnabled": "boolean?"
 			},
 			"variants": [
 				{
@@ -17484,12 +19097,14 @@
 			"body": {
 				"key": null,
 				"value": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string?",
 				"value": "string?",
-				"secret": "boolean?"
+				"secret": "boolean?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -17694,6 +19309,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -17725,14 +19341,18 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
 				],
-				"expire": null
+				"expire": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"scopes": "array",
-				"expire": "string?"
+				"expire": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -17906,6 +19526,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -17937,14 +19558,18 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
 				],
-				"expire": null
+				"expire": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"scopes": "array",
-				"expire": "string?"
+				"expire": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -18046,11 +19671,13 @@
 			"query": {},
 			"body": {
 				"name": null,
-				"applicationId": null
+				"applicationId": null,
+				"fingerprints": null
 			},
 			"bodyTypes": {
 				"name": "string",
-				"applicationId": "string"
+				"applicationId": "string",
+				"fingerprints": "array?"
 			},
 			"variants": [
 				{
@@ -18152,12 +19779,14 @@
 			"body": {
 				"key": null,
 				"value": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string?",
 				"value": "string?",
-				"secret": "boolean?"
+				"secret": "boolean?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -18226,6 +19855,7 @@
 					"python-3.12",
 					"python-3.13",
 					"python-3.14",
+					"python-3.15",
 					"python-ml-3.11",
 					"python-ml-3.12",
 					"python-ml-3.13",
@@ -18237,6 +19867,7 @@
 					"deno-2.0",
 					"deno-2.5",
 					"deno-2.6",
+					"deno-2.9",
 					"dart-2.15",
 					"dart-2.16",
 					"dart-2.17",
@@ -18284,7 +19915,9 @@
 					"go-1.24",
 					"go-1.25",
 					"go-1.26",
+					"go-1.27",
 					"rust-1.83",
+					"rust-1.99",
 					"static-1",
 					"flutter-3.24",
 					"flutter-3.27",
@@ -18402,6 +20035,7 @@
 					"webhooks.write",
 					"locale.read",
 					"avatars.read",
+					"avatars.write",
 					"health.read",
 					"assistant.read",
 					"migrations.read",
@@ -18433,8 +20067,11 @@
 					"apps.write",
 					"oauth2.read",
 					"oauth2.write",
-					"oauth2.introspect"
-				]
+					"oauth2.introspect",
+					"analytics.read",
+					"analytics.write"
+				],
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
@@ -18450,7 +20087,7 @@
 				"adapter": "string",
 				"fallbackFile": "string",
 				"installationId": "string",
-				"providerRepositoryId": "string",
+				"providerRepositoryId": "string?",
 				"providerBranch": "string",
 				"providerSilentMode": "boolean",
 				"providerRootDirectory": "string",
@@ -18459,7 +20096,8 @@
 				"buildSpecification": "string?",
 				"runtimeSpecification": "string",
 				"deploymentRetention": "integer",
-				"scopes": "array?"
+				"scopes": "array?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -18477,12 +20115,14 @@
 			"body": {
 				"key": null,
 				"value": null,
-				"secret": null
+				"secret": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"key": "string?",
 				"value": "string?",
-				"secret": "boolean?"
+				"secret": "boolean?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -18508,19 +20148,23 @@
 				],
 				"encryption": null,
 				"antivirus": null,
-				"transformations": null
+				"transformations": null,
+				"description": null,
+				"stripMetadata": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"permissions": "array?",
 				"fileSecurity": "boolean",
 				"enabled": "boolean",
-				"maximumFileSize": "integer",
+				"maximumFileSize": "integer?",
 				"allowedFileExtensions": "array",
-				"compression": "string",
-				"encryption": "boolean",
+				"compression": "string?",
+				"encryption": "boolean?",
 				"antivirus": "boolean",
-				"transformations": "boolean"
+				"transformations": "boolean",
+				"description": "string?",
+				"stripMetadata": "boolean?"
 			},
 			"variants": [
 				{
@@ -18555,6 +20199,7 @@
 			"body": {
 				"name": null,
 				"enabled": null,
+				"description": null,
 				"specification": null,
 				"replicas": null,
 				"syncMode": null
@@ -18562,6 +20207,7 @@
 			"bodyTypes": {
 				"name": "string",
 				"enabled": "boolean",
+				"description": "string?",
 				"specification": "string?",
 				"replicas": "integer?",
 				"syncMode": "string?"
@@ -18581,14 +20227,16 @@
 				"permissions": null,
 				"rowSecurity": null,
 				"enabled": null,
-				"purge": null
+				"purge": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"permissions": "array?",
 				"rowSecurity": "boolean",
 				"enabled": "boolean",
-				"purge": "boolean"
+				"purge": "boolean",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -18729,6 +20377,7 @@
 			"body": {
 				"name": null,
 				"enabled": null,
+				"description": null,
 				"specification": null,
 				"replicas": null,
 				"syncMode": null
@@ -18736,6 +20385,7 @@
 			"bodyTypes": {
 				"name": "string",
 				"enabled": "boolean",
+				"description": "string?",
 				"specification": "string?",
 				"replicas": "integer?",
 				"syncMode": "string?"
@@ -18757,14 +20407,16 @@
 				"dimension": null,
 				"permissions": null,
 				"documentSecurity": null,
-				"enabled": null
+				"enabled": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
 				"dimension": "integer",
 				"permissions": "array",
 				"documentSecurity": "boolean",
-				"enabled": "boolean"
+				"enabled": "boolean?",
+				"description": "string?"
 			},
 			"variants": [
 				{
@@ -18825,7 +20477,8 @@
 				"enabled": null,
 				"tls": null,
 				"authUsername": null,
-				"authPassword": null
+				"authPassword": null,
+				"description": null
 			},
 			"bodyTypes": {
 				"name": "string",
@@ -18834,7 +20487,8 @@
 				"enabled": "boolean",
 				"tls": "boolean",
 				"authUsername": "string",
-				"authPassword": "string"
+				"authPassword": "string?",
+				"description": "string?"
 			},
 			"variants": [
 				{
