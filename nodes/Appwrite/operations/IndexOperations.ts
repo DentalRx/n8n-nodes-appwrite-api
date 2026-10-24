@@ -20,6 +20,7 @@ const INDEX_TYPE_MAP: Record<string, string> = {
 	fulltext: 'fulltext',
 	unique: 'unique',
 	spatial: 'spatial',
+	trigram: 'trigram',
 };
 
 /**

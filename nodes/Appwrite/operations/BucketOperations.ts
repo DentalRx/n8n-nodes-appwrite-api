@@ -42,10 +42,12 @@ interface BucketOptions {
 	allowedFileExtensions?: string;
 	antivirus?: boolean;
 	compression?: string;
+	description?: string;
 	enabled?: boolean;
 	encryption?: boolean;
 	fileSecurity?: boolean;
 	maximumFileSize?: number;
+	stripMetadata?: boolean;
 	transformations?: boolean;
 }
 
@@ -75,6 +77,8 @@ export async function executeBucketOperation(
 			encryption: options.encryption ?? (current?.encryption as boolean | undefined),
 			antivirus: options.antivirus ?? (current?.antivirus as boolean | undefined),
 			transformations: options.transformations ?? (current?.transformations as boolean | undefined),
+			description: options.description ?? (current?.description as string | undefined),
+			stripMetadata: options.stripMetadata ?? (current?.stripMetadata as boolean | undefined),
 		};
 	};
 

@@ -146,6 +146,13 @@ export const bucketFields: INodeProperties[] = [
 					'Compression algorithm to use for stored files. For files above 20MB, compression is skipped even if enabled.',
 			},
 			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'A description of the bucket. Max length: 2048 characters.',
+			},
+			{
 				displayName: 'Enabled',
 				name: 'enabled',
 				type: 'boolean',
@@ -176,6 +183,14 @@ export const bucketFields: INodeProperties[] = [
 				typeOptions: { minValue: 1 },
 				default: 30000000,
 				description: 'Maximum file size allowed in bytes. Defaults to 30000000 (30MB).',
+			},
+			{
+				displayName: 'Strip Metadata',
+				name: 'stripMetadata',
+				type: 'boolean',
+				default: false,
+				description:
+					'Whether to remove metadata, such as EXIF data, from uploaded files. Defaults to off.',
 			},
 			{
 				displayName: 'Transformations',
