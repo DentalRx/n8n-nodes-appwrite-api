@@ -116,6 +116,19 @@ export const topicFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'A description of the topic. Max length: 2048 characters.',
+		displayOptions: {
+			show: {
+				resource: ['topic'],
+				operation: ['create'],
+			},
+		},
+	},
+	{
 		displayName: 'Subscribe Roles',
 		name: 'subscribe',
 		type: 'string',
@@ -187,6 +200,13 @@ export const topicFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'A description of the topic. Max length: 2048 characters.',
+			},
 			{
 				displayName: 'Name',
 				name: 'name',

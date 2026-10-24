@@ -40,11 +40,21 @@ export async function executeTableOperation(
 		const permissions = getPermissions.call(this, i);
 		const rowSecurity = this.getNodeParameter('rowSecurity', i, false) as boolean;
 		const enabled = this.getNodeParameter('enabled', i, true) as boolean;
+		const description = getStringParameter.call(this, 'description', i, '');
 		const response = await appwriteApiRequest.call(
 			this,
 			'POST',
 			tablesPath,
-			{ body: { tableId, name, permissions, rowSecurity, enabled } },
+			{
+				body: {
+					tableId,
+					name,
+					permissions,
+					rowSecurity,
+					enabled,
+					description: description || undefined,
+				},
+			},
 			i,
 		);
 		return toItems(response, i);
@@ -107,14 +117,16 @@ export async function executeTableOperation(
 		const name = getStringParameter.call(this, 'name', i);
 		const permissions = getPermissions.call(this, i);
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
+			description?: string;
 			enabled?: boolean;
 			rowSecurity?: boolean;
 		};
 		// PUT treats omitted `enabled`/`rowSecurity` as their defaults (true/false),
 		// so a plain rename would re-enable a disabled table or turn row security
-		// off. Read the current values when the user leaves the options out.
-		let { enabled, rowSecurity } = updateFields;
-		if (enabled === undefined || rowSecurity === undefined) {
+		// off, and an omitted description may be cleared. Read the current values
+		// when the user leaves the options out.
+		let { enabled, rowSecurity, description } = updateFields;
+		if (enabled === undefined || rowSecurity === undefined || description === undefined) {
 			const current = await appwriteApiRequest.call(
 				this,
 				'GET',
@@ -124,6 +136,7 @@ export async function executeTableOperation(
 			);
 			enabled = enabled ?? (current.enabled as boolean | undefined);
 			rowSecurity = rowSecurity ?? (current.rowSecurity as boolean | undefined);
+			description = description ?? (current.description as string | undefined);
 		}
 		const response = await appwriteApiRequest.call(
 			this,
@@ -135,6 +148,7 @@ export async function executeTableOperation(
 					permissions,
 					rowSecurity,
 					enabled,
+					description,
 				},
 			},
 			i,

@@ -179,6 +179,17 @@ describe('Project → Update Policy', () => {
 		},
 	);
 
+	it('sends a password deny list as an array', async () => {
+		const { body } = await run({
+			resource: 'project',
+			operation: 'updatePolicy',
+			projectPolicy: 'password-dictionary',
+			enabled: true,
+			updateFields: { denyList: 'acme, letmein' },
+		});
+		expect(body()).toEqual({ enabled: true, denyList: ['acme', 'letmein'] });
+	});
+
 	it('keeps optional settings the user did not add', async () => {
 		const { body } = await run({
 			resource: 'project',
@@ -356,6 +367,7 @@ describe('Platform', () => {
 				platformId: 'my-app',
 				name: 'My App',
 				[type.identifier.body]: 'com.example.app',
+				...(type.fingerprints ? { fingerprints: [] } : {}),
 			});
 			expect(Object.keys(body()).sort()).toEqual(specBody(`POST /project/platforms/${type.value}`));
 		},
@@ -377,12 +389,64 @@ describe('Platform', () => {
 
 			expect(requests[1].method).toBe('PUT');
 			expect(requests[1].url).toBe(`${BASE_URL}/project/platforms/${type.value}/p1`);
-			expect(body(1)).toEqual({ name: 'Renamed', [type.identifier.body]: 'current-id' });
+			expect(body(1)).toEqual({
+				name: 'Renamed',
+				[type.identifier.body]: 'current-id',
+				...(type.fingerprints ? { fingerprints: [] } : {}),
+			});
 			expect(Object.keys(body(1)).sort()).toEqual(
 				specBody(`PUT /project/platforms/${type.value}/{platformId}`),
 			);
 		},
 	);
+
+	it('sends an Android platform its signing fingerprints and keeps them on update', async () => {
+		const created = await run({
+			resource: 'platform',
+			operation: 'create',
+			platformType: 'android',
+			name: 'App',
+			platformIdentifier: 'com.example.app',
+			additionalFields: { platformFingerprints: 'AA:BB, CC:DD' },
+		});
+		expect(created.body().fingerprints).toEqual(['AA:BB', 'CC:DD']);
+
+		const kept = await run(
+			{
+				resource: 'platform',
+				operation: 'update',
+				platformId: { __rl: true, mode: 'id', value: 'p1' },
+				platformType: 'android',
+				updateFields: { name: 'Renamed' },
+			},
+			() => ({
+				$id: 'p1',
+				type: 'android',
+				name: 'Old',
+				applicationId: 'a',
+				fingerprints: ['AA:BB'],
+			}),
+		);
+		expect(kept.body(1).fingerprints).toEqual(['AA:BB']);
+
+		const replaced = await run(
+			{
+				resource: 'platform',
+				operation: 'update',
+				platformId: { __rl: true, mode: 'id', value: 'p1' },
+				platformType: 'android',
+				updateFields: { platformFingerprints: '["EE:FF"]' },
+			},
+			() => ({
+				$id: 'p1',
+				type: 'android',
+				name: 'Old',
+				applicationId: 'a',
+				fingerprints: ['AA:BB'],
+			}),
+		);
+		expect(replaced.body(1).fingerprints).toEqual(['EE:FF']);
+	});
 
 	it('explains which type to pick when it does not match the platform', async () => {
 		const { context, requests } = createExecuteContext({

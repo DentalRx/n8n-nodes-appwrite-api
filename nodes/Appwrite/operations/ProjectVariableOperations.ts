@@ -41,6 +41,7 @@ export async function executeProjectVariableOperation(
 					key: getStringParameter.call(this, 'key', i),
 					value: getStringParameter.call(this, 'value', i),
 					secret: this.getNodeParameter('secret', i, true) as boolean,
+					description: getStringParameter.call(this, 'description', i, '') || undefined,
 				},
 			},
 			i,
@@ -93,6 +94,7 @@ export async function executeProjectVariableOperation(
 
 	if (operation === 'update') {
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
+			description?: string;
 			key?: string;
 			secret?: boolean;
 			value?: string;
@@ -108,7 +110,14 @@ export async function executeProjectVariableOperation(
 			this,
 			'PUT',
 			variablePath(),
-			{ body: { key: updateFields.key, value: updateFields.value, secret: updateFields.secret } },
+			{
+				body: {
+					key: updateFields.key,
+					value: updateFields.value,
+					secret: updateFields.secret,
+					description: updateFields.description,
+				},
+			},
 			i,
 		);
 		return toItems(response, i);

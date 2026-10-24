@@ -42,10 +42,13 @@ const FUNCTION_RESOURCE: ComputeResource = {
 
 interface FunctionConfigOptions {
 	commands?: string;
+	description?: string;
+	emailEnabled?: boolean;
 	enabled?: boolean;
 	entrypoint?: string;
 	events?: string;
 	execute?: string;
+	interval?: number;
 	logging?: boolean;
 	runtime?: string;
 	schedule?: string;
@@ -73,10 +76,21 @@ export async function executeFunctionOperation(
 		const text = (raw: string | undefined, key: string) =>
 			raw === undefined ? (current?.[key] as string | undefined) : raw;
 
+		// A schedule and an interval cannot be combined. The interval is left out
+		// unless the user set it, so Appwrite keeps the current one (or drops it
+		// when a schedule is set); an interval set on its own replaces the schedule.
+		const schedule =
+			options.interval !== undefined && options.interval > 0 && options.schedule === undefined
+				? ''
+				: text(options.schedule, 'schedule');
+
 		return {
 			execute: list(options.execute, 'Execute Access', 'execute'),
 			events: list(options.events, 'Events', 'events'),
-			schedule: text(options.schedule, 'schedule'),
+			schedule,
+			interval: options.interval,
+			description: text(options.description, 'description'),
+			emailEnabled: options.emailEnabled ?? (current?.emailEnabled as boolean | undefined),
 			timeout: options.timeout ?? (current?.timeout as number | undefined),
 			enabled: options.enabled ?? (current?.enabled as boolean | undefined),
 			logging: options.logging ?? (current?.logging as boolean | undefined),

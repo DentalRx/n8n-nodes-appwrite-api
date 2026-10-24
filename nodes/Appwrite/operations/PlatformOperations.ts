@@ -8,6 +8,7 @@ import {
 	fetchAllPages,
 	getCollectionParameter,
 	getResourceId,
+	parseStringList,
 	getStringParameter,
 	lookupEnum,
 	toItems,
@@ -33,6 +34,9 @@ export async function executePlatformOperation(
 
 	if (operation === 'create') {
 		const type = platformType();
+		const additionalFields = type.fingerprints
+			? getCollectionParameter.call(this, 'additionalFields', i)
+			: {};
 		const response = await appwriteApiRequest.call(
 			this,
 			'POST',
@@ -42,6 +46,16 @@ export async function executePlatformOperation(
 					platformId: resolveId(getStringParameter.call(this, 'platformId', i, '')),
 					name: getStringParameter.call(this, 'name', i),
 					[type.identifier.body]: getStringParameter.call(this, 'platformIdentifier', i),
+					...(type.fingerprints
+						? {
+								fingerprints: parseStringList.call(
+									this,
+									additionalFields.platformFingerprints as string | undefined,
+									'Fingerprints',
+									i,
+								),
+							}
+						: {}),
 				},
 			},
 			i,
@@ -111,6 +125,7 @@ export async function executePlatformOperation(
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
 			name?: string;
 			platformIdentifier?: string;
+			platformFingerprints?: string;
 		};
 		// The update endpoints require both the name and the identifier, so read
 		// the platform first and resend whichever the user did not change.
@@ -133,6 +148,19 @@ export async function executePlatformOperation(
 				body: {
 					name: updateFields.name ?? current.name,
 					[type.identifier.body]: updateFields.platformIdentifier ?? current[type.identifier.body],
+					...(type.fingerprints
+						? {
+								fingerprints:
+									updateFields.platformFingerprints === undefined
+										? (current.fingerprints ?? [])
+										: parseStringList.call(
+												this,
+												updateFields.platformFingerprints,
+												'Fingerprints',
+												i,
+											),
+							}
+						: {}),
 				},
 			},
 			i,

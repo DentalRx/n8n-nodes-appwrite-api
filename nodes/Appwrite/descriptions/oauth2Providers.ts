@@ -171,6 +171,13 @@ function prompt(brand: string, options: INodePropertyOptions[]): OAuth2ProviderF
 	};
 }
 
+/** A provider with the standard fields plus a Prompt setting, placed before the on/off switch. */
+function withPrompt(provider: OAuth2Provider, options: INodePropertyOptions[]): OAuth2Provider {
+	const fields = [...provider.fields];
+	fields.splice(fields.length - 1, 0, prompt(provider.name, options));
+	return { ...provider, fields };
+}
+
 const CONSENT: INodePropertyOptions = {
 	name: 'Consent',
 	value: 'consent',
@@ -190,6 +197,11 @@ const LOGIN: INodePropertyOptions = {
 	name: 'Login',
 	value: 'login',
 	description: 'Ask the user to sign in again',
+};
+const CREATE: INodePropertyOptions = {
+	name: 'Create',
+	value: 'create',
+	description: 'Show the sign-up screen',
 };
 
 /**
@@ -251,6 +263,7 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 		fields: [
 			...credentials('Auth0'),
 			domain('Auth0', 'endpoint', 'e.g. example.us.auth0.com'),
+			prompt('Auth0', [CONSENT, LOGIN, NONE]),
 			enabled('Auth0'),
 		],
 	},
@@ -269,7 +282,7 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 	standard('box', 'Box'),
 	standard('cloudflare', 'Cloudflare'),
 	standard('dailymotion', 'Dailymotion', ['apiKey', 'API Key'], ['apiSecret', 'API Secret']),
-	standard('discord', 'Discord'),
+	withPrompt(standard('discord', 'Discord'), [CONSENT, NONE]),
 	standard(
 		'disqus',
 		'Disqus',
@@ -289,7 +302,7 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 			enabled('FusionAuth'),
 		],
 	},
-	standard('github', 'GitHub'),
+	withPrompt(standard('github', 'GitHub'), [SELECT_ACCOUNT]),
 	{
 		value: 'gitlab',
 		name: 'GitLab',
@@ -320,15 +333,18 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 		],
 	},
 	standard('huggingface', 'Hugging Face'),
-	standard(
-		'kakao',
-		'Kakao',
-		['clientId', 'REST API Key'],
-		[
-			'clientSecret',
-			'Client Secret',
-			'Generate it in the Security settings of Kakao Login and set its status to enabled',
-		],
+	withPrompt(
+		standard(
+			'kakao',
+			'Kakao',
+			['clientId', 'REST API Key'],
+			[
+				'clientSecret',
+				'Client Secret',
+				'Generate it in the Security settings of Kakao Login and set its status to enabled',
+			],
+		),
+		[CREATE, LOGIN, NONE, SELECT_ACCOUNT],
 	),
 	{
 		value: 'keycloak',
@@ -369,6 +385,7 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 				'Which Microsoft accounts can sign in: common (any account), organizations (work or school accounts), consumers (personal accounts), or a specific tenant ID',
 				'e.g. common',
 			),
+			prompt('Microsoft', [CONSENT, LOGIN, NONE, SELECT_ACCOUNT]),
 			enabled('Microsoft'),
 		],
 	},
@@ -446,6 +463,7 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 				'The ID of a custom authorization server. Leave empty to use the default one.',
 				'e.g. aus000000000000000h7z',
 			),
+			prompt('Okta', [CONSENT, LOGIN, NONE]),
 			enabled('Okta'),
 		],
 	},
@@ -458,11 +476,14 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 	),
 	standard('podio', 'Podio'),
 	standard('resend', 'Resend'),
-	standard(
-		'salesforce',
-		'Salesforce',
-		['customerKey', 'Consumer Key'],
-		['customerSecret', 'Consumer Secret'],
+	withPrompt(
+		standard(
+			'salesforce',
+			'Salesforce',
+			['customerKey', 'Consumer Key'],
+			['customerSecret', 'Consumer Secret'],
+		),
+		[CONSENT, LOGIN],
 	),
 	standard('slack', 'Slack'),
 	standard('spotify', 'Spotify'),
@@ -481,6 +502,7 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 		['oauth2ClientSecret', 'OAuth2 Client Secret'],
 	),
 	standard('twitch', 'Twitch'),
+	standard('webflow', 'Webflow'),
 	standard('wordpress', 'WordPress'),
 	standard('x', 'X', ['customerKey', 'Customer Key'], ['secretKey', 'Secret Key']),
 	standard(
@@ -490,6 +512,6 @@ export const OAUTH2_PROVIDERS: OAuth2Provider[] = [
 		['clientSecret', 'Client Secret', 'Yahoo also calls it the Consumer Secret'],
 	),
 	standard('yandex', 'Yandex'),
-	standard('zoho', 'Zoho'),
+	withPrompt(standard('zoho', 'Zoho'), [CONSENT]),
 	standard('zoom', 'Zoom'),
 ];

@@ -304,10 +304,12 @@ export async function executeAccountOperation(
 	}
 
 	if (operation === 'createEmailPasswordSession') {
+		const { duration } = getCollectionParameter.call(this, 'options', i) as { duration?: number };
 		const response = await withApiKey('POST', '/account/sessions/email', {
 			body: {
 				email: getStringParameter.call(this, 'email', i),
 				password: getStringParameter.call(this, 'password', i),
+				duration,
 			},
 		});
 		return toItems(response, i);

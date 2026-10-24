@@ -54,6 +54,7 @@ function kept(current: IDataObject | undefined, key: string): IDataObject[string
 interface SiteConfigOptions {
 	buildCommand?: string;
 	buildRuntime?: string;
+	description?: string;
 	enabled?: boolean;
 	fallbackFile?: string;
 	installCommand?: string;
@@ -89,6 +90,7 @@ export async function executeSiteOperation(
 			raw === undefined ? kept(current, key) : raw;
 
 		return {
+			description: text(options.description, 'description'),
 			enabled: options.enabled ?? kept(current, 'enabled'),
 			logging: options.logging ?? kept(current, 'logging'),
 			timeout: options.timeout ?? kept(current, 'timeout'),

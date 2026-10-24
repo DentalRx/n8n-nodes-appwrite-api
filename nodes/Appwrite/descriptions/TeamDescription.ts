@@ -341,6 +341,14 @@ export const teamFields: INodeProperties[] = [
 				description: 'The name of the new team member. Max length: 128 characters.',
 			},
 			{
+				displayName: 'Membership ID',
+				name: 'membershipId',
+				type: 'string',
+				default: '',
+				description:
+					'A custom ID for the membership. Leave empty (or use unique()) to auto-generate a unique ID. Allowed characters: a-z, A-Z, 0-9, period, hyphen, underscore; must not start with a special character. Max length: 36 characters.',
+			},
+			{
 				displayName: 'URL',
 				name: 'url',
 				type: 'string',

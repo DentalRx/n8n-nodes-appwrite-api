@@ -278,6 +278,22 @@ export function variableProperties(resource: string): INodeProperties[] {
 			displayOptions: show(resource, ['updateVariable']),
 		},
 		{
+			displayName: 'Description',
+			name: 'description',
+			type: 'string',
+			default: '',
+			description: 'A description of the variable',
+			displayOptions: show(resource, ['createVariable']),
+		},
+		{
+			displayName: 'Description',
+			name: 'description',
+			type: 'string',
+			default: '',
+			description: 'A new description for the variable. Leave empty to keep the current one.',
+			displayOptions: show(resource, ['updateVariable']),
+		},
+		{
 			displayName: 'Secret',
 			name: 'secret',
 			type: 'boolean',

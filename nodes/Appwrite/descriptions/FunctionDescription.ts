@@ -176,6 +176,21 @@ const functionConfigOptions: INodeProperties[] = [
 		description: 'Build commands to run before the function is deployed',
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'A description of the function',
+	},
+	{
+		displayName: 'Email Triggering',
+		name: 'emailEnabled',
+		type: 'boolean',
+		default: false,
+		description:
+			'Whether inbound email can trigger the function. When off, SMTP recipients for the function are rejected.',
+	},
+	{
 		displayName: 'Enabled',
 		name: 'enabled',
 		type: 'boolean',
@@ -225,6 +240,15 @@ const functionConfigOptions: INodeProperties[] = [
 		default: '',
 		description:
 			'The new execution runtime, e.g. node-22 or python-3.12. Leave this option out to keep the current runtime. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+	},
+	{
+		displayName: 'Interval (Minutes)',
+		name: 'interval',
+		type: 'number',
+		typeOptions: { minValue: 0 },
+		default: 0,
+		description:
+			'Minutes between scheduled executions; Appwrite picks when within each interval the function runs. Use 0 to disable. Cannot be combined with a schedule: setting an interval without a schedule replaces the schedule, and setting a schedule replaces the interval.',
 	},
 	{
 		displayName: 'Schedule',
@@ -357,7 +381,9 @@ export const functionFields: INodeProperties[] = [
 				operation: ['create'],
 			},
 		},
-		options: functionConfigOptions.filter((option) => option.name !== 'runtime'),
+		options: functionConfigOptions.filter(
+			(option) => option.name !== 'runtime' && option.name !== 'emailEnabled',
+		),
 	},
 	{
 		displayName: 'Options',

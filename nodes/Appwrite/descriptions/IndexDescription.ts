@@ -86,6 +86,11 @@ export const indexFields: INodeProperties[] = [
 				description: 'An index for point, line, and polygon columns',
 			},
 			{
+				name: 'Trigram',
+				value: 'trigram',
+				description: 'Speeds up partial-match and similarity searches on text columns',
+			},
+			{
 				name: 'Unique',
 				value: 'unique',
 				description: 'Rejects duplicate values in the indexed columns',
@@ -131,6 +136,13 @@ export const indexFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'An optional description of the index',
+			},
 			{
 				displayName: 'Lengths',
 				name: 'lengths',

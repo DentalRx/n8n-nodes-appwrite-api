@@ -234,6 +234,13 @@ export const organizationProjectFields: INodeProperties[] = [
 		displayOptions: { show: show('updateKey') },
 		options: [
 			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'A description of the key',
+			},
+			{
 				displayName: 'Expiration Date',
 				name: 'expire',
 				type: 'dateTime',

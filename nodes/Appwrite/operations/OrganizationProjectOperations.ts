@@ -133,6 +133,7 @@ export async function executeOrganizationProjectOperation(
 	if (operation === 'updateKey') {
 		const path = keyPath();
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
+			description?: string;
 			expire?: string;
 			keyScopes?: unknown;
 			name?: unknown;
@@ -158,6 +159,7 @@ export async function executeOrganizationProjectOperation(
 							: parseStringList.call(this, updateFields.keyScopes, 'Scopes', i),
 					// Appwrite reads null, not an empty date, as "never expires".
 					expire: expire || null,
+					description: updateFields.description ?? current.description,
 				},
 			},
 			i,

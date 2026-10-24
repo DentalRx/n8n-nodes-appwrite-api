@@ -15,6 +15,10 @@ export interface ProjectPolicyField {
 	property: INodeProperties;
 	/** Converts the parameter's value to what Appwrite expects, when they differ. */
 	toBody?: (value: unknown) => unknown;
+	/** Whether the value is entered as a comma-separated list or JSON array and sent as an array. */
+	list?: boolean;
+	/** Whether an empty value is meaningful, so the parameter is not marked required. */
+	allowEmpty?: boolean;
 }
 
 export interface ProjectPolicy {
@@ -58,19 +62,35 @@ function count(
 	};
 }
 
-/** A policy that is only switched on or off. */
+/** A policy that is only switched on or off, and optionally takes more settings. */
 function onOff(
 	value: string,
 	name: string,
 	description: string,
 	enabledDescription: string,
+	optional: ProjectPolicyField[] = [],
 ): ProjectPolicy {
 	return {
 		value,
 		name,
 		description,
 		required: [toggle('enabled', 'enabled', 'Enabled', enabledDescription)],
-		optional: [],
+		optional,
+	};
+}
+
+/** The custom blocked values a password policy takes on top of its built-in checks. */
+function denyList(what: string): ProjectPolicyField {
+	return {
+		body: 'denyList',
+		list: true,
+		property: {
+			displayName: 'Deny List',
+			name: 'denyList',
+			type: 'string',
+			default: '',
+			description: `Custom values to reject ${what}, as a comma-separated list or a JSON array. Case-sensitive, up to 100 entries of 1 to 256 characters. Leave empty to clear the list.`,
+		},
 	};
 }
 
@@ -132,7 +152,29 @@ export const PROJECT_POLICIES: ProjectPolicy[] = [
 		'Disallow Personal Data',
 		"Reject passwords that contain the user's personal data",
 		"Whether to reject passwords that contain the user's name, email, phone number, or ID. Existing passwords stay valid.",
+		[denyList("in passwords, on top of the checks on the user's own data")],
 	),
+	{
+		value: 'passkey',
+		name: 'Passkeys',
+		description: 'Set the domain passkeys are bound to',
+		required: [
+			{
+				body: 'rpId',
+				allowEmpty: true,
+				property: {
+					displayName: 'Relying Party ID',
+					name: 'passkeyRpId',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g. example.com',
+					description:
+						'The domain of your application, such as example.com. Use localhost for local development, or leave empty to unset it.',
+				},
+			},
+		],
+		optional: [],
+	},
 	onOff(
 		'session-invalidation',
 		'Invalidate Sessions',
@@ -216,6 +258,7 @@ export const PROJECT_POLICIES: ProjectPolicy[] = [
 		'Password Dictionary',
 		'Reject the 10,000 most common passwords',
 		'Whether to reject new passwords that are among the 10,000 most common passwords. Existing passwords stay valid.',
+		[denyList('in passwords, on top of the 10,000 most common ones')],
 	),
 	{
 		value: 'password-history',
@@ -235,6 +278,22 @@ export const PROJECT_POLICIES: ProjectPolicy[] = [
 			},
 		],
 		optional: [],
+	},
+	{
+		value: 'password-rotation',
+		name: 'Password Rotation',
+		description: 'Make passwords expire after a set age',
+		required: [],
+		optional: [
+			toggle('enabled', 'enabled', 'Enabled', 'Whether passwords expire. Disabled by default.'),
+			count(
+				'passwordMaxAge',
+				'maxAge',
+				'Maximum Age (Seconds)',
+				[86400, 315360000, 31536000],
+				'The longest a password stays valid, in seconds, from 1 day (86400) up to 10 years (315360000)',
+			),
+		],
 	},
 	{
 		value: 'password-strength',
@@ -357,7 +416,7 @@ export function policyProperties(resource: string): INodeProperties[] {
 		...PROJECT_POLICIES.flatMap((policy) =>
 			policy.required.map((field): INodeProperties => ({
 				...field.property,
-				...(field.property.type === 'boolean' ? {} : { required: true }),
+				...(field.property.type === 'boolean' || field.allowEmpty ? {} : { required: true }),
 				displayOptions: { show: show(policy) },
 			})),
 		),

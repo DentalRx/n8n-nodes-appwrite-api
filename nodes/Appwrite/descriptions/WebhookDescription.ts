@@ -84,6 +84,13 @@ const webhookSettings: INodeProperties[] = [
 			'Whether Appwrite verifies the SSL/TLS certificate of the webhook URL before delivering. Leave off only for URLs with a self-signed certificate.',
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'A description of the webhook',
+	},
+	{
 		displayName: 'Enabled',
 		name: 'enabled',
 		type: 'boolean',

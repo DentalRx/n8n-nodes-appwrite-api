@@ -53,9 +53,11 @@ export async function executeTeamOperation(
 		const userId = getOptionalResourceId.call(this, 'userId', i, 'user');
 		const phone = getStringParameter.call(this, 'phone', i, '');
 		const options = getCollectionParameter.call(this, 'options', i) as {
+			membershipId?: string;
 			name?: string;
 			url?: string;
 		};
+		const membershipId = options.membershipId ?? '';
 		const url = options.url ?? '';
 		const name = options.name ?? '';
 		const response = await appwriteApiRequest.call(
@@ -64,6 +66,7 @@ export async function executeTeamOperation(
 			path,
 			{
 				body: {
+					membershipId: membershipId === '' ? undefined : resolveId(membershipId),
 					email: email === '' ? undefined : email,
 					userId: userId === '' ? undefined : userId,
 					phone: phone === '' ? undefined : phone,

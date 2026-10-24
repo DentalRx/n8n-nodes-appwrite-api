@@ -1046,6 +1046,30 @@ export const accountFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['account'],
+				operation: ['createEmailPasswordSession'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Session Duration (Seconds)',
+				name: 'duration',
+				type: 'number',
+				typeOptions: { minValue: 60 },
+				default: 60,
+				description:
+					'How long the session lasts, in seconds. Minimum is 60, and it cannot exceed the project maximum session length. Defaults to the project maximum session length.',
+			},
+		],
+	},
+	{
+		displayName: 'Options',
+		name: 'options',
+		type: 'collection',
+		placeholder: 'Add option',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['account'],
 				operation: ['createEmailToken'],
 			},
 		},

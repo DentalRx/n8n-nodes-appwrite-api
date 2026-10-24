@@ -38,7 +38,14 @@ export async function executeTopicOperation(
 			this,
 			'POST',
 			'/messaging/topics',
-			{ body: { topicId, name, subscribe } },
+			{
+				body: {
+					topicId,
+					name,
+					description: getStringParameter.call(this, 'description', i, '') || undefined,
+					subscribe,
+				},
+			},
 			i,
 		);
 		return toItems(response, i);
@@ -178,6 +185,7 @@ export async function executeTopicOperation(
 	if (operation === 'update') {
 		const path = topicPath();
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
+			description?: string;
 			name?: string;
 			subscribe?: string;
 		};
@@ -188,6 +196,7 @@ export async function executeTopicOperation(
 			{
 				body: {
 					name: updateFields.name || undefined,
+					description: updateFields.description,
 					subscribe: listOrUndefined(updateFields.subscribe, 'Subscribe Roles'),
 				},
 			},

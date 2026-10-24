@@ -291,6 +291,14 @@ export const columnFields: INodeProperties[] = [
 				},
 			},
 			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description:
+					'An optional description of the column. On Update, leave it out to keep the current description, or add it empty to clear it.',
+			},
+			{
 				displayName: 'Encrypt',
 				name: 'encrypt',
 				type: 'boolean',

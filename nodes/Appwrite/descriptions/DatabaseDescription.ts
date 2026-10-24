@@ -197,6 +197,19 @@ export const databaseFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'An optional description of the database',
+		displayOptions: {
+			show: {
+				resource: ['database'],
+				operation: ['create'],
+			},
+		},
+	},
+	{
 		displayName: 'Enabled',
 		name: 'enabled',
 		type: 'boolean',
@@ -223,6 +236,14 @@ export const databaseFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description:
+					'An optional description of the database. Leave this out to keep the current description, or add it empty to clear it.',
+			},
 			{
 				displayName: 'Enabled',
 				name: 'enabled',

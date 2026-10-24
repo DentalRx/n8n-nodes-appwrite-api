@@ -212,7 +212,11 @@ export async function executeProjectOperation(
 			i,
 		);
 		const toBody = (field: ProjectPolicyField, value: unknown): unknown =>
-			field.toBody === undefined ? value : field.toBody(value);
+			field.list
+				? parseStringList.call(this, value as string, field.property.displayName, i)
+				: field.toBody === undefined
+					? value
+					: field.toBody(value);
 
 		const body: IDataObject = {};
 		for (const field of policy.required) {

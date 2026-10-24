@@ -111,11 +111,12 @@ export async function executeDatabaseOperation(
 		const databaseId = resolveId(getStringParameter.call(this, 'databaseId', i, ''));
 		const name = getStringParameter.call(this, 'name', i);
 		const enabled = this.getNodeParameter('enabled', i, true) as boolean;
+		const description = getStringParameter.call(this, 'description', i, '');
 		const response = await appwriteApiRequest.call(
 			this,
 			'POST',
 			'/tablesdb',
-			{ body: { databaseId, name, enabled } },
+			{ body: { databaseId, name, enabled, description: description || undefined } },
 			i,
 		);
 		return toItems(response, i);
@@ -291,13 +292,15 @@ export async function executeDatabaseOperation(
 		const databaseId = getResourceId.call(this, 'databaseId', i, 'database', 'Database');
 		const name = getStringParameter.call(this, 'name', i);
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
+			description?: string;
 			enabled?: boolean;
 		};
 		// PUT /tablesdb/{id} treats an omitted `enabled` as its default (true), so
-		// a plain rename would silently re-enable a disabled database. Read the
-		// current value when the user leaves the option out.
-		let enabled = updateFields.enabled;
-		if (enabled === undefined) {
+		// a plain rename would silently re-enable a disabled database, and an
+		// omitted description may be cleared. Read the current values when the
+		// user leaves the options out.
+		let { enabled, description } = updateFields;
+		if (enabled === undefined || description === undefined) {
 			const current = await appwriteApiRequest.call(
 				this,
 				'GET',
@@ -305,13 +308,14 @@ export async function executeDatabaseOperation(
 				{},
 				i,
 			);
-			enabled = current.enabled as boolean | undefined;
+			enabled = enabled ?? (current.enabled as boolean | undefined);
+			description = description ?? (current.description as string | undefined);
 		}
 		const response = await appwriteApiRequest.call(
 			this,
 			'PUT',
 			`/tablesdb/${encodeURIComponent(databaseId)}`,
-			{ body: { name, enabled } },
+			{ body: { name, enabled, description } },
 			i,
 		);
 		return toItems(response, i);

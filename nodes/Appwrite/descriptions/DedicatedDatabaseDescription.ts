@@ -1111,12 +1111,55 @@ export const dedicatedDatabaseFields: INodeProperties[] = [
 		displayOptions: { show: show(['restore']) },
 		options: [
 			{
+				displayName: 'Auto Promote',
+				name: 'autoPromote',
+				type: 'boolean',
+				default: true,
+				description:
+					'Whether a clone restoration switches the database over as soon as the recovery is ready. Turn off to hold the recovery until you promote it yourself. Only applies to the Clone mode.',
+			},
+			{
+				displayName: 'Restore Mode',
+				name: 'restoreMode',
+				type: 'options',
+				options: [
+					{
+						name: 'Clone',
+						value: 'clone',
+						description:
+							'Recover onto a second workload beside this database; the endpoint and credentials do not change',
+					},
+					{
+						name: 'Copy',
+						value: 'copy',
+						description:
+							'Recover onto a separate database with its own endpoint, one you name or one Appwrite provisions',
+					},
+					{
+						name: 'In Place',
+						value: 'in_place',
+						description: 'Replay the backup over this database',
+					},
+				],
+				default: 'in_place',
+				description:
+					'Where the backup is restored. Left out, Appwrite uses Copy when a Target Database ID is set and In Place otherwise.',
+			},
+			{
 				displayName: 'Target Database ID',
 				name: 'targetDatabaseId',
 				type: 'string',
 				default: '',
 				description:
 					'Restore into this other database instead of the one above. It must be ready and run the same engine and version.',
+			},
+			{
+				displayName: 'Target Name',
+				name: 'targetName',
+				type: 'string',
+				default: '',
+				description:
+					'The display name of the database a copy restoration provisions. Defaults to the database name followed by "(restored)". Max length: 128 characters.',
 			},
 		],
 	},

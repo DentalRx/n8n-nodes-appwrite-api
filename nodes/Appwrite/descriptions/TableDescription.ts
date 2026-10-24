@@ -92,6 +92,19 @@ export const tableFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Description',
+		name: 'description',
+		type: 'string',
+		default: '',
+		description: 'An optional description of the table',
+		displayOptions: {
+			show: {
+				resource: ['table'],
+				operation: ['create'],
+			},
+		},
+	},
+	{
 		displayName: 'Enabled',
 		name: 'enabled',
 		type: 'boolean',
@@ -137,6 +150,14 @@ export const tableFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description:
+					'An optional description of the table. Leave this out to keep the current description, or add it empty to clear it.',
+			},
 			{
 				displayName: 'Enabled',
 				name: 'enabled',

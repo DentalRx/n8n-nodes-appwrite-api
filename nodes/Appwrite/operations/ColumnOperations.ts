@@ -112,6 +112,7 @@ export async function executeColumnOperation(
 	const options = getCollectionParameter.call(this, 'options', i) as {
 		array?: boolean;
 		defaultValue?: string;
+		description?: string;
 		encrypt?: boolean;
 		max?: number | string;
 		min?: number | string;
@@ -156,6 +157,7 @@ export async function executeColumnOperation(
 						key: relationshipKey === '' ? undefined : relationshipKey,
 						twoWayKey: twoWayKey === '' ? undefined : twoWayKey,
 						onDelete,
+						description: options.description || undefined,
 					},
 				},
 				i,
@@ -179,6 +181,8 @@ export async function executeColumnOperation(
 							? undefined
 							: lookupEnum(this, RELATION_MUTATE_MAP, options.onDelete, 'on-delete action', i),
 					newKey: newKeyRaw === '' ? undefined : newKeyRaw,
+					// Left out, the description is kept, like onDelete.
+					description: options.description,
 				},
 			},
 			i,
@@ -196,7 +200,13 @@ export async function executeColumnOperation(
 
 	/** POST /tablesdb/{databaseId}/tables/{tableId}/columns/{type} */
 	const createColumn = async (type: string, body: IDataObject): Promise<IDataObject> =>
-		await appwriteApiRequest.call(this, 'POST', `${columnsPath}/${type}`, { body }, i);
+		await appwriteApiRequest.call(
+			this,
+			'POST',
+			`${columnsPath}/${type}`,
+			{ body: { ...body, description: options.description || undefined } },
+			i,
+		);
 
 	/**
 	 * PATCH /tablesdb/{databaseId}/tables/{tableId}/columns/{type}/{key}
@@ -217,6 +227,7 @@ export async function executeColumnOperation(
 		const payload: IDataObject = {
 			...body,
 			required: options.required ?? (current.required as boolean | undefined) ?? false,
+			description: options.description ?? (current.description as string | undefined),
 		};
 		if (options.defaultValue === undefined) {
 			// A required column cannot keep a default.

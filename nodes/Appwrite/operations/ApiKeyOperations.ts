@@ -101,6 +101,7 @@ export async function executeApiKeyOperation(
 	if (operation === 'update') {
 		const path = `/project/keys/${encodeURIComponent(keyId())}`;
 		const updateFields = getCollectionParameter.call(this, 'updateFields', i) as {
+			description?: string;
 			expire?: string;
 			keyScopes?: string;
 			name?: string;
@@ -126,6 +127,7 @@ export async function executeApiKeyOperation(
 							: parseStringList.call(this, updateFields.keyScopes, 'Scopes', i),
 					// Appwrite reads null, not an empty date, as "never expires".
 					expire: expire || null,
+					description: updateFields.description ?? current.description,
 				},
 			},
 			i,
