@@ -137,6 +137,13 @@ export const indexFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'An optional description of the index',
+			},
+			{
 				displayName: 'Lengths',
 				name: 'lengths',
 				type: 'string',

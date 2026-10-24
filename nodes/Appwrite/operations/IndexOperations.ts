@@ -83,6 +83,9 @@ export async function executeIndexOperation(
 			i,
 		);
 		const { orders, lengths } = getIndexOrdersAndLengths.call(this, i);
+		const { description } = getCollectionParameter.call(this, 'options', i) as {
+			description?: string;
+		};
 
 		const response = await appwriteApiRequest.call(
 			this,
@@ -95,6 +98,7 @@ export async function executeIndexOperation(
 					columns,
 					orders,
 					lengths,
+					description: description || undefined,
 				},
 			},
 			i,
