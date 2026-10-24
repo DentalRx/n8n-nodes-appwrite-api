@@ -407,7 +407,7 @@ describe('Platform', () => {
 			platformType: 'android',
 			name: 'App',
 			platformIdentifier: 'com.example.app',
-			platformFingerprints: 'AA:BB, CC:DD',
+			additionalFields: { platformFingerprints: 'AA:BB, CC:DD' },
 		});
 		expect(created.body().fingerprints).toEqual(['AA:BB', 'CC:DD']);
 

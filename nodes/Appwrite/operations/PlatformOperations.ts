@@ -34,6 +34,9 @@ export async function executePlatformOperation(
 
 	if (operation === 'create') {
 		const type = platformType();
+		const additionalFields = type.fingerprints
+			? getCollectionParameter.call(this, 'additionalFields', i)
+			: {};
 		const response = await appwriteApiRequest.call(
 			this,
 			'POST',
@@ -47,7 +50,7 @@ export async function executePlatformOperation(
 						? {
 								fingerprints: parseStringList.call(
 									this,
-									getStringParameter.call(this, 'platformFingerprints', i, ''),
+									additionalFields.platformFingerprints as string | undefined,
 									'Fingerprints',
 									i,
 								),

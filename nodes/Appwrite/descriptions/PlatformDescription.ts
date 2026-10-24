@@ -204,8 +204,13 @@ export const platformFields: INodeProperties[] = [
 		displayOptions: { show: show('create') },
 	},
 	...PLATFORM_TYPES.filter((type) => type.fingerprints).map((type): INodeProperties => ({
-		...fingerprints,
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add field',
+		default: {},
 		displayOptions: { show: show('create', type) },
+		options: [fingerprints],
 	})),
 	// One Update Fields collection per type, so the identifier carries the
 	// label and description of the chosen kind of app.

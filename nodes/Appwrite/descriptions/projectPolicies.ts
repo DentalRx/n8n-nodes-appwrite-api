@@ -17,6 +17,8 @@ export interface ProjectPolicyField {
 	toBody?: (value: unknown) => unknown;
 	/** Whether the value is entered as a comma-separated list or JSON array and sent as an array. */
 	list?: boolean;
+	/** Whether an empty value is meaningful, so the parameter is not marked required. */
+	allowEmpty?: boolean;
 }
 
 export interface ProjectPolicy {
@@ -159,6 +161,7 @@ export const PROJECT_POLICIES: ProjectPolicy[] = [
 		required: [
 			{
 				body: 'rpId',
+				allowEmpty: true,
 				property: {
 					displayName: 'Relying Party ID',
 					name: 'passkeyRpId',
@@ -166,7 +169,7 @@ export const PROJECT_POLICIES: ProjectPolicy[] = [
 					default: '',
 					placeholder: 'e.g. example.com',
 					description:
-						'The domain of your application, such as example.com. Use localhost for local development.',
+						'The domain of your application, such as example.com. Use localhost for local development, or leave empty to unset it.',
 				},
 			},
 		],
@@ -413,7 +416,7 @@ export function policyProperties(resource: string): INodeProperties[] {
 		...PROJECT_POLICIES.flatMap((policy) =>
 			policy.required.map((field): INodeProperties => ({
 				...field.property,
-				...(field.property.type === 'boolean' ? {} : { required: true }),
+				...(field.property.type === 'boolean' || field.allowEmpty ? {} : { required: true }),
 				displayOptions: { show: show(policy) },
 			})),
 		),
