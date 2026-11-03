@@ -148,6 +148,12 @@ export const PROJECT_POLICIES: ProjectPolicy[] = [
 		`Whether to allow only corporate email addresses, blocking free and disposable email providers, ${EMAIL_CHANGE}`,
 	),
 	onOff(
+		'deny-realtime-guests',
+		'Deny Realtime Guests',
+		'Stop connections without a signed-in user from subscribing to realtime channels',
+		'Whether to stop guests, connections without a signed-in user, from subscribing to realtime channels. A guest can still connect and sign in over the connection, but cannot subscribe until it does.',
+	),
+	onOff(
 		'password-personal-data',
 		'Disallow Personal Data',
 		"Reject passwords that contain the user's personal data",

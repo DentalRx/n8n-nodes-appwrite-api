@@ -179,6 +179,40 @@ describe('Project → Update Policy', () => {
 		},
 	);
 
+	it('offers every updatable policy, Deny Realtime Guests included, on Get Policy too', () => {
+		expect(operations['GET /project/policies/{policyId}']).toBeDefined();
+		const property = description.properties.find(
+			(candidate) =>
+				candidate.name === 'projectPolicy' &&
+				candidate.displayOptions?.show?.operation?.includes('getPolicy'),
+		);
+		const values = (property?.options as INodePropertyOptions[]).map((option) => option.value);
+		expect(values.sort()).toEqual(specFamily('PATCH', '/project/policies/'));
+		expect(values).toContain('deny-realtime-guests');
+	});
+
+	it('reads the realtime guests policy', async () => {
+		const { requests } = await run({
+			resource: 'project',
+			operation: 'getPolicy',
+			projectPolicy: 'deny-realtime-guests',
+		});
+		expect(requests[0].method).toBe('GET');
+		expect(requests[0].url).toBe(`${BASE_URL}/project/policies/deny-realtime-guests`);
+	});
+
+	it.each([true, false])('sets the realtime guests policy to enabled = %s', async (enabled) => {
+		const { requests, body } = await run({
+			resource: 'project',
+			operation: 'updatePolicy',
+			projectPolicy: 'deny-realtime-guests',
+			enabled,
+		});
+		expect(requests[0].method).toBe('PATCH');
+		expect(requests[0].url).toBe(`${BASE_URL}/project/policies/deny-realtime-guests`);
+		expect(body()).toEqual({ enabled });
+	});
+
 	it('sends a password deny list as an array', async () => {
 		const { body } = await run({
 			resource: 'project',
