@@ -1,6 +1,6 @@
 {
 	"source": "https://github.com/appwrite/specs",
-	"version": "2.6.2",
+	"version": "2.7.0",
 	"operations": {
 		"DELETE /account/consents/{consentId}": {
 			"id": "accountDeleteConsent",
@@ -553,6 +553,18 @@
 				}
 			]
 		},
+		"DELETE /monitors/{monitorId}": {
+			"id": "monitorsDelete",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "monitorsDelete",
+					"required": []
+				}
+			]
+		},
 		"DELETE /mysql/{databaseId}": {
 			"id": "mysqlDelete",
 			"query": {},
@@ -789,6 +801,18 @@
 			"variants": [
 				{
 					"name": "projectDeletePlatform",
+					"required": []
+				}
+			]
+		},
+		"DELETE /project/sessions": {
+			"id": "projectDeleteSessions",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "projectDeleteSessions",
 					"required": []
 				}
 			]
@@ -1476,6 +1500,33 @@
 				}
 			]
 		},
+		"GET /alerts": {
+			"id": "alertsList",
+			"query": {
+				"queries": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "alertsList",
+					"required": []
+				}
+			]
+		},
+		"GET /alerts/{alertId}": {
+			"id": "alertsGet",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "alertsGet",
+					"required": []
+				}
+			]
+		},
 		"GET /analytics/properties": {
 			"id": "analyticsListProperties",
 			"query": {
@@ -1519,7 +1570,9 @@
 					"region",
 					"city",
 					"browser",
+					"browserVersion",
 					"operatingSystem",
+					"operatingSystemVersion",
 					"device",
 					"screenSize",
 					"referrerSource",
@@ -1536,8 +1589,10 @@
 					"trafficType",
 					"botName",
 					"botCategory",
-					"eventName"
+					"eventName",
+					"props"
 				],
+				"propKey": null,
 				"dateRange": null,
 				"startAt": null,
 				"endAt": null,
@@ -3387,69 +3442,6 @@
 				}
 			]
 		},
-		"GET /migrations/appwrite/report": {
-			"id": "migrationsGetAppwriteReport",
-			"query": {
-				"resources": [
-					"user",
-					"team",
-					"membership",
-					"auth-methods",
-					"policies",
-					"oauth2-provider",
-					"database",
-					"table",
-					"column",
-					"index",
-					"row",
-					"document",
-					"attribute",
-					"collection",
-					"documentsdb",
-					"vectorsdb",
-					"bucket",
-					"file",
-					"function",
-					"deployment",
-					"environment-variable",
-					"provider",
-					"topic",
-					"subscriber",
-					"message",
-					"site",
-					"site-deployment",
-					"site-variable",
-					"platform",
-					"api-key",
-					"webhook",
-					"smtp",
-					"backup-policy",
-					"project-variable",
-					"project-protocols",
-					"project-labels",
-					"project-services",
-					"project-email-template",
-					"project-environment",
-					"rule"
-				],
-				"endpoint": null,
-				"projectID": null,
-				"key": null
-			},
-			"body": {},
-			"bodyTypes": {},
-			"variants": [
-				{
-					"name": "migrationsGetAppwriteReport",
-					"required": [
-						"endpoint",
-						"key",
-						"projectID",
-						"resources"
-					]
-				}
-			]
-		},
 		"GET /migrations/firebase/report": {
 			"id": "migrationsGetFirebaseReport",
 			"query": {
@@ -3741,6 +3733,33 @@
 			"variants": [
 				{
 					"name": "mongoListSpecifications",
+					"required": []
+				}
+			]
+		},
+		"GET /monitors": {
+			"id": "monitorsList",
+			"query": {
+				"queries": null,
+				"total": null
+			},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "monitorsList",
+					"required": []
+				}
+			]
+		},
+		"GET /monitors/{monitorId}": {
+			"id": "monitorsGet",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "monitorsGet",
 					"required": []
 				}
 			]
@@ -4557,6 +4576,18 @@
 			"variants": [
 				{
 					"name": "projectGetPolicy",
+					"required": []
+				}
+			]
+		},
+		"GET /project/prefs": {
+			"id": "projectGetPrefs",
+			"query": {},
+			"body": {},
+			"bodyTypes": {},
+			"variants": [
+				{
+					"name": "projectGetPrefs",
 					"required": []
 				}
 			]
@@ -9080,6 +9111,24 @@
 				}
 			]
 		},
+		"PATCH /project/policies/deny-realtime-guests": {
+			"id": "projectUpdateDenyRealtimeGuestsPolicy",
+			"query": {},
+			"body": {
+				"enabled": null
+			},
+			"bodyTypes": {
+				"enabled": "boolean"
+			},
+			"variants": [
+				{
+					"name": "projectUpdateDenyRealtimeGuestsPolicy",
+					"required": [
+						"enabled"
+					]
+				}
+			]
+		},
 		"PATCH /project/policies/membership-privacy": {
 			"id": "projectUpdateMembershipPrivacyPolicy",
 			"query": {},
@@ -11147,7 +11196,8 @@
 				"props": null,
 				"userId": null,
 				"ip": null,
-				"userAgent": null
+				"userAgent": null,
+				"interactive": null
 			},
 			"bodyTypes": {
 				"name": "string",
@@ -11161,7 +11211,8 @@
 				"props": "array",
 				"userId": "string",
 				"ip": "string",
-				"userAgent": "string"
+				"userAgent": "string",
+				"interactive": "boolean?"
 			},
 			"variants": [
 				{
@@ -12898,6 +12949,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -12913,6 +12967,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -13869,6 +13925,7 @@
 					"project-variable",
 					"project-protocols",
 					"project-labels",
+					"project-preferences",
 					"project-services",
 					"project-email-template",
 					"project-environment",
@@ -14369,6 +14426,40 @@
 					"name": "mongoCreateUpgrade",
 					"required": [
 						"targetVersion"
+					]
+				}
+			]
+		},
+		"POST /monitors/usage": {
+			"id": "monitorsCreateUsageMonitor",
+			"query": {},
+			"body": {
+				"monitorId": null,
+				"name": null,
+				"rules": null,
+				"window": null,
+				"cooldown": null,
+				"enabled": null,
+				"notify": null,
+				"critical": null
+			},
+			"bodyTypes": {
+				"monitorId": "string",
+				"name": "string",
+				"rules": "array",
+				"window": "integer",
+				"cooldown": "integer",
+				"enabled": "boolean",
+				"notify": "array",
+				"critical": "boolean"
+			},
+			"variants": [
+				{
+					"name": "monitorsCreateUsageMonitor",
+					"required": [
+						"monitorId",
+						"name",
+						"rules"
 					]
 				}
 			]
@@ -15027,6 +15118,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -15042,6 +15136,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -15330,11 +15426,48 @@
 			"query": {},
 			"body": {
 				"environmentId": null,
-				"name": null
+				"name": null,
+				"resources": [
+					"user",
+					"team",
+					"membership",
+					"auth-methods",
+					"policies",
+					"oauth2-provider",
+					"database",
+					"documentsdb",
+					"vectorsdb",
+					"table",
+					"collection",
+					"column",
+					"attribute",
+					"index",
+					"row",
+					"document",
+					"bucket",
+					"file",
+					"function",
+					"environment-variable",
+					"deployment",
+					"site",
+					"site-variable",
+					"site-deployment",
+					"provider",
+					"topic",
+					"subscriber",
+					"platform",
+					"smtp",
+					"project-variable",
+					"project-protocols",
+					"project-labels",
+					"project-services",
+					"project-email-template"
+				]
 			},
 			"bodyTypes": {
 				"environmentId": "string",
-				"name": "string"
+				"name": "string",
+				"resources": "array"
 			},
 			"variants": [
 				{
@@ -15439,6 +15572,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -15454,6 +15590,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -16073,6 +16211,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -16088,6 +16229,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -19004,6 +19147,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -19019,6 +19165,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -19143,6 +19291,34 @@
 						"provider",
 						"secretKey"
 					]
+				}
+			]
+		},
+		"PUT /monitors/usage/{monitorId}": {
+			"id": "monitorsUpdateUsageMonitor",
+			"query": {},
+			"body": {
+				"name": null,
+				"rules": null,
+				"window": null,
+				"cooldown": null,
+				"enabled": null,
+				"notify": null,
+				"critical": null
+			},
+			"bodyTypes": {
+				"name": "string?",
+				"rules": "array?",
+				"window": "integer?",
+				"cooldown": "integer?",
+				"enabled": "boolean?",
+				"notify": "array?",
+				"critical": "boolean?"
+			},
+			"variants": [
+				{
+					"name": "monitorsUpdateUsageMonitor",
+					"required": []
 				}
 			]
 		},
@@ -19307,6 +19483,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -19322,6 +19501,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -19524,6 +19705,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -19539,6 +19723,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
@@ -19769,6 +19955,24 @@
 					"required": [
 						"name",
 						"packageIdentifierName"
+					]
+				}
+			]
+		},
+		"PUT /project/prefs": {
+			"id": "projectUpdatePrefs",
+			"query": {},
+			"body": {
+				"prefs": null
+			},
+			"bodyTypes": {
+				"prefs": "object"
+			},
+			"variants": [
+				{
+					"name": "projectUpdatePrefs",
+					"required": [
+						"prefs"
 					]
 				}
 			]
@@ -20033,6 +20237,9 @@
 					"rules.write",
 					"webhooks.read",
 					"webhooks.write",
+					"monitors.read",
+					"monitors.write",
+					"alerts.read",
 					"locale.read",
 					"avatars.read",
 					"avatars.write",
@@ -20048,6 +20255,8 @@
 					"insights.write",
 					"reports.read",
 					"reports.write",
+					"reviews.read",
+					"reviews.write",
 					"presences.read",
 					"presences.write",
 					"dedicatedDatabases.execute",
