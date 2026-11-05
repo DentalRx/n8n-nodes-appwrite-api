@@ -11194,10 +11194,10 @@
 				"scrollDepth": null,
 				"engagementTime": null,
 				"props": null,
-				"interactive": null,
 				"userId": null,
 				"ip": null,
-				"userAgent": null
+				"userAgent": null,
+				"interactive": null
 			},
 			"bodyTypes": {
 				"name": "string",
@@ -11209,10 +11209,10 @@
 				"scrollDepth": "integer",
 				"engagementTime": "integer",
 				"props": "array",
-				"interactive": "boolean?",
 				"userId": "string",
 				"ip": "string",
-				"userAgent": "string"
+				"userAgent": "string",
+				"interactive": "boolean?"
 			},
 			"variants": [
 				{
